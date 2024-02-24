@@ -57,28 +57,48 @@ public class MainApplicationFrame extends JFrame {
 
     private JMenuBar generateMenuBar() {
         JMenuBar menuBar = new JMenuBar();
-
         JMenuViewBuilder lookAndFeelMenuView = new JMenuViewBuilder.Builder()
                 .jMenu(new JMenu("Режим отображения"))
                 .setMnemonic(KeyEvent.VK_V)
                 .setAccessibleDescription("Управление режимом отображения приложения")
-                .addMenuItem(new JMenuItem("Системная схема", KeyEvent.VK_S), (event) -> {
-                    setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                    this.invalidate();
-                })
-                .addMenuItem(new JMenuItem("Универсальная схема", KeyEvent.VK_S), (event) -> {
-                    setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                    this.invalidate();
-                })
+                .addMenuItem(
+                        new JmenuItemBuilder.Builder()
+                                .setMnemonic(KeyEvent.VK_S)
+                                .setText("Системная схема")
+                                .addActionListener((event) -> {
+                                    setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                                    this.invalidate();
+                                })
+                                .buid()
+                                .jMenuItem
+                )
+                .addMenuItem(
+                        new JmenuItemBuilder.Builder()
+                                .setMnemonic(KeyEvent.VK_S)
+                                .setText("Универсальная схема")
+                                .addActionListener((event) -> {
+                                    setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                                    this.invalidate();
+                                })
+                                .buid()
+                                .jMenuItem
+                )
                 .buid();
 
         JMenuViewBuilder testMenuView = new JMenuViewBuilder.Builder()
                 .jMenu(new JMenu("Тесты"))
                 .setMnemonic(KeyEvent.VK_V)
                 .setAccessibleDescription("Тестовые команды")
-                .addMenuItem(new JMenuItem("Сообщение в лог", KeyEvent.VK_S), (event) -> {
-                    Logger.debug("Новая строка");
-                })
+                .addMenuItem(
+                        new JmenuItemBuilder.Builder()
+                                .setMnemonic(KeyEvent.VK_S)
+                                .setText("Сообщение в лог")
+                                .addActionListener((event) -> {
+                                    Logger.debug("Новая строка");
+                                })
+                                .buid()
+                                .jMenuItem
+                )
                 .buid();
 
         menuBar.add(lookAndFeelMenuView.jMenu);

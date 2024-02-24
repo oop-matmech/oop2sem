@@ -23,8 +23,7 @@ public class JMenuViewBuilder {
             return this;
         }
 
-        public Builder addMenuItem(JMenuItem jMenuItem, ActionListener actionListener) {
-            jMenuItem.addActionListener(actionListener);
+        public Builder addMenuItem(JMenuItem jMenuItem) {
             jMenu.add(jMenuItem);
             return this;
         }
