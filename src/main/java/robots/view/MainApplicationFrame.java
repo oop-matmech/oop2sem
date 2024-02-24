@@ -36,7 +36,8 @@ public class MainApplicationFrame extends JFrame {
         gameWindow.setSize(400, 400);
         addWindow(gameWindow);
 
-        setJMenuBar(generateMenuBar());
+        CustomJmenuBar customJmenuBar = new CustomJmenuBar(this);
+        setJMenuBar(customJmenuBar.generateMenuBar());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
@@ -53,66 +54,5 @@ public class MainApplicationFrame extends JFrame {
     protected void addWindow(JInternalFrame frame) {
         desktopPane.add(frame);
         frame.setVisible(true);
-    }
-
-    private JMenuBar generateMenuBar() {
-        JMenuBar menuBar = new JMenuBar();
-        JMenuViewBuilder lookAndFeelMenuView = new JMenuViewBuilder.Builder()
-                .jMenu(new JMenu("Режим отображения"))
-                .setMnemonic(KeyEvent.VK_V)
-                .setAccessibleDescription("Управление режимом отображения приложения")
-                .addMenuItem(
-                        new JmenuItemBuilder.Builder()
-                                .setMnemonic(KeyEvent.VK_S)
-                                .setText("Системная схема")
-                                .addActionListener((event) -> {
-                                    setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                                    this.invalidate();
-                                })
-                                .buid()
-                                .jMenuItem
-                )
-                .addMenuItem(
-                        new JmenuItemBuilder.Builder()
-                                .setMnemonic(KeyEvent.VK_S)
-                                .setText("Универсальная схема")
-                                .addActionListener((event) -> {
-                                    setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                                    this.invalidate();
-                                })
-                                .buid()
-                                .jMenuItem
-                )
-                .buid();
-
-        JMenuViewBuilder testMenuView = new JMenuViewBuilder.Builder()
-                .jMenu(new JMenu("Тесты"))
-                .setMnemonic(KeyEvent.VK_V)
-                .setAccessibleDescription("Тестовые команды")
-                .addMenuItem(
-                        new JmenuItemBuilder.Builder()
-                                .setMnemonic(KeyEvent.VK_S)
-                                .setText("Сообщение в лог")
-                                .addActionListener((event) -> {
-                                    Logger.debug("Новая строка");
-                                })
-                                .buid()
-                                .jMenuItem
-                )
-                .buid();
-
-        menuBar.add(lookAndFeelMenuView.jMenu);
-        menuBar.add(testMenuView.jMenu);
-        return menuBar;
-    }
-
-    private void setLookAndFeel(String className) {
-        try {
-            UIManager.setLookAndFeel(className);
-            SwingUtilities.updateComponentTreeUI(this);
-        } catch (ClassNotFoundException | InstantiationException
-                 | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            Logger.error(e.getMessage());
-        }
     }
 }
