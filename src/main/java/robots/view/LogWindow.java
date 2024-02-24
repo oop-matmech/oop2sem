@@ -1,8 +1,8 @@
-package robots.gui;
+package robots.view;
 
-import robots.log.LogChangeListener;
-import robots.log.LogEntry;
-import robots.log.LogWindowSource;
+import robots.model.log.LogChangeListener;
+import robots.model.log.LogEntry;
+import robots.model.log.LogWindowSource;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

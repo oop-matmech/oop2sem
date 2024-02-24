@@ -1,4 +1,4 @@
-package robots.gui;
+package robots.view;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -56,6 +56,7 @@ public class GameVisualizer extends JPanel
             @Override
             public void mouseClicked(MouseEvent e)
             {
+                System.out.println(e.getPoint());
                 setTargetPosition(e.getPoint());
                 repaint();
             }
@@ -141,7 +142,7 @@ public class GameVisualizer extends JPanel
         }
         m_robotPositionX = newX;
         m_robotPositionY = newY;
-        double newDirection = asNormalizedRadians(m_robotDirection + angularVelocity * duration); 
+        double newDirection = asNormalizedRadians(m_robotDirection + angularVelocity * duration);
         m_robotDirection = newDirection;
     }
 

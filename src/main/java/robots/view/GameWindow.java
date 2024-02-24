@@ -1,4 +1,4 @@
-package robots.gui;
+package robots.view;
 
 import java.awt.BorderLayout;
 
