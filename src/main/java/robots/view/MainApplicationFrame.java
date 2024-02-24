@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
+ * ------- сделано ---------
  * Что требуется сделать:
  * 1. Метод создания меню перегружен функционалом и трудно читается.
  * Следует разделить его на серию более простых методов (или вообще выделить отдельный класс).
@@ -57,7 +58,7 @@ public class MainApplicationFrame extends JFrame {
     private JMenuBar generateMenuBar() {
         JMenuBar menuBar = new JMenuBar();
 
-        JMenuView lookAndFeelMenuView = new JMenuView.Builder()
+        JMenuViewBuilder lookAndFeelMenuView = new JMenuViewBuilder.Builder()
                 .jMenu(new JMenu("Режим отображения"))
                 .setMnemonic(KeyEvent.VK_V)
                 .setAccessibleDescription("Управление режимом отображения приложения")
@@ -71,7 +72,7 @@ public class MainApplicationFrame extends JFrame {
                 })
                 .buid();
 
-        JMenuView testMenuView = new JMenuView.Builder()
+        JMenuViewBuilder testMenuView = new JMenuViewBuilder.Builder()
                 .jMenu(new JMenu("Тесты"))
                 .setMnemonic(KeyEvent.VK_V)
                 .setAccessibleDescription("Тестовые команды")
@@ -91,7 +92,7 @@ public class MainApplicationFrame extends JFrame {
             SwingUtilities.updateComponentTreeUI(this);
         } catch (ClassNotFoundException | InstantiationException
                  | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            // just ignore
+            Logger.error(e.getMessage());
         }
     }
 }

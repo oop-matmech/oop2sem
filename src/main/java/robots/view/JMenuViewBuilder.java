@@ -3,7 +3,7 @@ package robots.view;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class JMenuView{
+public class JMenuViewBuilder {
     public JMenu jMenu;
 
     public static class Builder{
@@ -29,12 +29,12 @@ public class JMenuView{
             return this;
         }
 
-        public JMenuView buid() {
-            return new JMenuView(this);
+        public JMenuViewBuilder buid() {
+            return new JMenuViewBuilder(this);
         }
     }
 
-    private JMenuView(Builder builder) {
+    private JMenuViewBuilder(Builder builder) {
         jMenu = builder.jMenu;
     }
 }
