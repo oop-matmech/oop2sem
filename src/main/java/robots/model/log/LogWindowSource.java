@@ -5,7 +5,7 @@ import java.util.Collections;
 
 /**
  * Что починить:
- * -------- в процессе -------
+ * -------- сделано -------
  * 1. Этот класс порождает утечку ресурсов (связанные слушатели оказываются
  * удерживаемыми в памяти)
  * ------ сделано -------
@@ -29,7 +29,9 @@ public class LogWindowSource {
 
     public void registerListener(LogChangeListener listener) {
         synchronized (m_listeners) {
-            m_listeners.add(listener);
+            if (!m_listeners.contains(listener)) {
+                m_listeners.add(listener);
+            }
             m_activeListeners = null;
         }
     }

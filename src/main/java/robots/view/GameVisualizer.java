@@ -56,7 +56,6 @@ public class GameVisualizer extends JPanel
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                System.out.println(e.getPoint());
                 setTargetPosition(e.getPoint());
                 repaint();
             }
