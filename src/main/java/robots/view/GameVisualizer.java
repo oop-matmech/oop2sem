@@ -85,6 +85,7 @@ public class GameVisualizer extends JPanel {
         double velocity = maxVelocity;
         double angleToTarget = angleTo(m_robotPositionX, m_robotPositionY, m_targetPositionX, m_targetPositionY);
         double angularVelocity = 0;
+
         if (angleToTarget > m_robotDirection) {
             angularVelocity = maxAngularVelocity;
         }
@@ -118,6 +119,8 @@ public class GameVisualizer extends JPanel {
         if (!Double.isFinite(newY)) {
             newY = m_robotPositionY + velocity * duration * Math.sin(m_robotDirection);
         }
+        newX = applyLimits(newX, 0, getWidth());
+        newY = applyLimits(newY, 0, getHeight());
         m_robotPositionX = newX;
         m_robotPositionY = newY;
         double newDirection = asNormalizedRadians(m_robotDirection + angularVelocity * duration);
