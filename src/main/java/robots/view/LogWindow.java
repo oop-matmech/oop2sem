@@ -7,6 +7,7 @@ import robots.model.log.LogWindowSource;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.TextArea;
+import java.beans.PropertyVetoException;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
@@ -34,9 +35,9 @@ public class LogWindow extends JInternalFrame implements LogChangeListener
     }
 
     @Override
-    public boolean isClosed() {
+    public void doDefaultCloseAction() {
         m_logSource.unregisterListener(this);
-        return super.isClosed();
+        super.doDefaultCloseAction();
     }
 
     private void updateLogContent()
