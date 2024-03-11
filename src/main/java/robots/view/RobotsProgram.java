@@ -4,11 +4,13 @@ import java.awt.Frame;
 
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import java.util.Locale;
 
 public class RobotsProgram
 {
     public static void main(String[] args) {
       try {
+        Locale.setDefault(Locale.getDefault());
         UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

@@ -5,6 +5,8 @@ import robots.model.log.Logger;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * ------- сделано ---------
@@ -14,6 +16,10 @@ import java.awt.event.KeyEvent;
  */
 public class MainApplicationFrame extends JFrame {
     private final JDesktopPane desktopPane = new JDesktopPane();
+
+    private final GameWindow gameWindow = new GameWindow();
+
+    private final LogWindow logWindow = createLogWindow();
 
     public MainApplicationFrame() {
         //Make the big window be indented 50 pixels from each edge
@@ -28,11 +34,8 @@ public class MainApplicationFrame extends JFrame {
 
         setContentPane(desktopPane);
 
-
-        LogWindow logWindow = createLogWindow();
         addWindow(logWindow);
 
-        GameWindow gameWindow = new GameWindow();
         gameWindow.setSize(400, 400);
         addWindow(gameWindow);
 
@@ -47,12 +50,19 @@ public class MainApplicationFrame extends JFrame {
         logWindow.setSize(300, 800);
         setMinimumSize(logWindow.getSize());
         logWindow.pack();
-        Logger.debug("Протокол работает");
+
+        Logger.debug(ResourceBundle.getBundle("log_window", Locale.getDefault()).getString("log_default_msg"));
+        // Logger.debug("Новая строка");
         return logWindow;
     }
 
     protected void addWindow(JInternalFrame frame) {
         desktopPane.add(frame);
         frame.setVisible(true);
+    }
+
+    public void setTitle(){
+        gameWindow.setTitle(ResourceBundle.getBundle("game_window", Locale.getDefault()).getString("game_window_name"));
+        gameWindow.setTitle(ResourceBundle.getBundle("log_window", Locale.getDefault()).getString("log_window_name"));
     }
 }

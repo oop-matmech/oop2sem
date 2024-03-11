@@ -11,7 +11,8 @@ import java.beans.PropertyVetoException;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
-
+import java.util.ResourceBundle;
+import java.util.Locale;
 
 
 public class LogWindow extends JInternalFrame implements LogChangeListener
@@ -21,7 +22,8 @@ public class LogWindow extends JInternalFrame implements LogChangeListener
 
     public LogWindow(LogWindowSource logSource) 
     {
-        super("Протокол работы", true, true, true, true);
+        super(ResourceBundle.getBundle("log_window", Locale.getDefault()).getString("log_window_name"), true, true, true, true);
+        // super("Протокол работы", true, true, true, true);
         m_logSource = logSource;
         m_logSource.registerListener(this);
         m_logContent = new TextArea("");
