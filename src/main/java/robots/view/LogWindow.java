@@ -33,6 +33,12 @@ public class LogWindow extends JInternalFrame implements LogChangeListener
         updateLogContent();
     }
 
+    @Override
+    public boolean isClosed() {
+        m_logSource.unregisterListener(this);
+        return super.isClosed();
+    }
+
     private void updateLogContent()
     {
         StringBuilder content = new StringBuilder();

@@ -1,7 +1,7 @@
 package robots.model.log;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
  * Что починить:
@@ -17,45 +17,39 @@ import java.util.Collections;
 public class LogWindowSource {
     private int m_iQueueLength;
 
-    private ArrayList<LogEntry> m_messages;
-    private final ArrayList<LogChangeListener> m_listeners;
+    private ConcurrentLinkedDeque<LogEntry> m_messages;
+    private final ConcurrentLinkedDeque<LogChangeListener> m_listeners;
     private volatile LogChangeListener[] m_activeListeners;
 
     public LogWindowSource(int iQueueLength) {
         m_iQueueLength = iQueueLength;
-        m_messages = new ArrayList<LogEntry>(iQueueLength);
-        m_listeners = new ArrayList<LogChangeListener>();
+        m_messages = new ConcurrentLinkedDeque<LogEntry>();
+        m_listeners = new ConcurrentLinkedDeque<LogChangeListener>();
     }
 
     public void registerListener(LogChangeListener listener) {
-        synchronized (m_listeners) {
-            if (!m_listeners.contains(listener)) {
-                m_listeners.add(listener);
-            }
-            m_activeListeners = null;
+        if (!m_listeners.contains(listener)) {
+            m_listeners.add(listener);
         }
+        m_activeListeners = null;
     }
 
     public void unregisterListener(LogChangeListener listener) {
-        synchronized (m_listeners) {
-            m_listeners.remove(listener);
-            m_activeListeners = null;
-        }
+        m_listeners.remove(listener);
+        m_activeListeners = null;
     }
 
     public void append(LogLevel logLevel, String strMessage) {
         LogEntry entry = new LogEntry(logLevel, strMessage);
-        if (m_messages.size() >= m_iQueueLength) {
-            m_messages.remove(0);
+        if (size() >= m_iQueueLength) {
+            m_messages.removeFirst();
         }
         m_messages.add(entry);
         LogChangeListener[] activeListeners = m_activeListeners;
         if (activeListeners == null) {
-            synchronized (m_listeners) {
-                if (m_activeListeners == null) {
-                    activeListeners = m_listeners.toArray(new LogChangeListener[0]);
-                    m_activeListeners = activeListeners;
-                }
+            if (m_activeListeners == null) {
+                activeListeners = m_listeners.toArray(new LogChangeListener[0]);
+                m_activeListeners = activeListeners;
             }
         }
         for (LogChangeListener listener : activeListeners) {
@@ -72,7 +66,7 @@ public class LogWindowSource {
             return Collections.emptyList();
         }
         int indexTo = Math.min(startFrom + count, m_messages.size());
-        return m_messages.subList(startFrom, indexTo);
+        return m_messages.stream().toList().subList(startFrom, indexTo);
     }
 
     public Iterable<LogEntry> all() {
