@@ -1,12 +1,11 @@
 package robots.view;
 
+import robots.model.i18n.I18nBundles;
+import robots.model.i18n.I18nProvider;
 import robots.model.log.Logger;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 /**
  * ------- сделано ---------
@@ -14,10 +13,10 @@ import java.util.ResourceBundle;
  * 1. Метод создания меню перегружен функционалом и трудно читается.
  * Следует разделить его на серию более простых методов (или вообще выделить отдельный класс).
  */
-public class MainApplicationFrame extends JFrame {
-    private final JDesktopPane desktopPane = new JDesktopPane();
+public class MainApplicationFrame extends AbstractWindow {
 
-    private final GameWindow gameWindow = new GameWindow();
+    private final JDesktopPane desktopPane = new JDesktopPane();
+    private final GameWindow gameWindow = createGameWindow();
 
     private final LogWindow logWindow = createLogWindow();
 
@@ -35,8 +34,6 @@ public class MainApplicationFrame extends JFrame {
         setContentPane(desktopPane);
 
         addWindow(logWindow);
-
-        gameWindow.setSize(400, 400);
         addWindow(gameWindow);
 
         CustomJmenuBar customJmenuBar = new CustomJmenuBar(this);
@@ -50,10 +47,14 @@ public class MainApplicationFrame extends JFrame {
         logWindow.setSize(300, 800);
         setMinimumSize(logWindow.getSize());
         logWindow.pack();
-
-        Logger.debug(ResourceBundle.getBundle("log_window", Locale.getDefault()).getString("log_default_msg"));
-        // Logger.debug("Новая строка");
+        Logger.debug(I18nProvider.getMessage(I18nBundles.LOG_WINDOW, "log_default_msg"));
         return logWindow;
+    }
+
+    protected GameWindow createGameWindow(){
+        GameWindow gameWindow = new GameWindow();
+        gameWindow.setSize(400, 400);
+        return gameWindow;
     }
 
     protected void addWindow(JInternalFrame frame) {
@@ -61,8 +62,10 @@ public class MainApplicationFrame extends JFrame {
         frame.setVisible(true);
     }
 
-    public void setTitle(){
-        gameWindow.setTitle(ResourceBundle.getBundle("game_window", Locale.getDefault()).getString("game_window_name"));
-        gameWindow.setTitle(ResourceBundle.getBundle("log_window", Locale.getDefault()).getString("log_window_name"));
+    @Override
+    public void onUiChanged() {
+        super.onUiChanged();
+        gameWindow.onUiChanged();
+        logWindow.onUiChanged();
     }
 }

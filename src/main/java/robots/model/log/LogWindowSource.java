@@ -1,7 +1,8 @@
 package robots.model.log;
 
 import java.util.Collections;
-import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Что починить:
@@ -16,20 +17,20 @@ import java.util.concurrent.ConcurrentLinkedDeque;
  */
 public class LogWindowSource {
     private int m_iQueueLength;
-
-    private ConcurrentLinkedDeque<LogEntry> m_messages;
+    AtomicInteger mCounter = new AtomicInteger(0);
+    private BlockingDeque<LogEntry> m_messages;
     private final ConcurrentLinkedDeque<LogChangeListener> m_listeners;
     private volatile LogChangeListener[] m_activeListeners;
 
     public LogWindowSource(int iQueueLength) {
         m_iQueueLength = iQueueLength;
-        m_messages = new ConcurrentLinkedDeque<LogEntry>();
+        m_messages = new LinkedBlockingDeque<>(iQueueLength);
         m_listeners = new ConcurrentLinkedDeque<LogChangeListener>();
     }
 
     public void registerListener(LogChangeListener listener) {
         if (!m_listeners.contains(listener)) {
-            m_listeners.add(listener);
+            m_listeners.offer(listener);
         }
         m_activeListeners = null;
     }
@@ -41,10 +42,19 @@ public class LogWindowSource {
 
     public void append(LogLevel logLevel, String strMessage) {
         LogEntry entry = new LogEntry(logLevel, strMessage);
-        if (size() >= m_iQueueLength) {
-            m_messages.removeFirst();
-        }
-        m_messages.add(entry);
+
+        boolean status = false;
+        do {
+            if (mCounter.getAndIncrement() >= m_iQueueLength) {
+                m_messages.pollFirst();
+                mCounter.getAndDecrement();
+            }
+            status = m_messages.offerLast(entry);
+        } while (!status);
+        triggerLogs();
+    }
+
+    public void triggerLogs() {
         LogChangeListener[] activeListeners = m_activeListeners;
         if (activeListeners == null) {
             if (m_activeListeners == null) {
@@ -58,14 +68,14 @@ public class LogWindowSource {
     }
 
     public int size() {
-        return m_messages.size();
+        return mCounter.get();
     }
 
     public Iterable<LogEntry> range(int startFrom, int count) {
-        if (startFrom < 0 || startFrom >= m_messages.size()) {
+        if (startFrom < 0 || startFrom >= size()) {
             return Collections.emptyList();
         }
-        int indexTo = Math.min(startFrom + count, m_messages.size());
+        int indexTo = Math.min(startFrom + count, size());
         return m_messages.stream().toList().subList(startFrom, indexTo);
     }
 

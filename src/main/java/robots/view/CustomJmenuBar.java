@@ -1,17 +1,17 @@
 package robots.view;
 
+import robots.model.i18n.I18nBundles;
+import robots.model.i18n.I18nProvider;
 import robots.model.log.Logger;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
-import java.util.ResourceBundle;
 import java.util.Locale;
-public class CustomJmenuBar {
-    private JFrame screen;
+public class CustomJmenuBar extends AbstractWindow {
+    private AbstractWindow screen;
     private final JMenuBar menuBar = new JMenuBar();
-    private ResourceBundle currBundle = ResourceBundle.getBundle("data", Locale.getDefault());
 
-    public CustomJmenuBar(JFrame screen_) {
+    public CustomJmenuBar(AbstractWindow screen_) {
         screen = screen_;
     }
 
@@ -20,20 +20,24 @@ public class CustomJmenuBar {
     }
 
     private void switchLocale(Locale locale){
-        currBundle = ResourceBundle.getBundle("data", locale);
-        Locale.setDefault(locale);
+        String language = locale.getLanguage();
+        String country = locale.getCountry();
+        var newLocale = new Locale(language, country);
+        I18nProvider.setLocale(newLocale);
+        this.onUiChanged();
+        screen.onUiChanged();
     }
 
     public JMenuBar generateMenuBar() {
 
         JMenuViewBuilder lookAndFeelMenuView = new JMenuViewBuilder.Builder()
-                .jMenu(new JMenu(currBundle.getString("view_mode_button")))
+                .jMenu(new JMenu(I18nProvider.getMessage(I18nBundles.DATA, "view_mode_button")))
                 .setMnemonic(KeyEvent.VK_V)
-                .setAccessibleDescription(currBundle.getString("change_view_button"))
+                .setAccessibleDescription(I18nProvider.getMessage(I18nBundles.DATA, "change_view_button"))
                 .addMenuItem(
                         new JmenuItemBuilder.Builder()
                                 .setMnemonic(KeyEvent.VK_S)
-                                .setText(currBundle.getString("sys_scheme_choice"))
+                                .setText(I18nProvider.getMessage(I18nBundles.DATA, "sys_scheme_choice"))
                                 .addActionListener((event) -> {
                                     setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                                     screen.invalidate();
@@ -44,7 +48,7 @@ public class CustomJmenuBar {
                 .addMenuItem(
                         new JmenuItemBuilder.Builder()
                                 .setMnemonic(KeyEvent.VK_S)
-                                .setText(currBundle.getString("universal_scheme_choice"))
+                                .setText(I18nProvider.getMessage(I18nBundles.DATA, "universal_scheme_choice"))
                                 .addActionListener((event) -> {
                                     setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                                     screen.invalidate();
@@ -55,15 +59,15 @@ public class CustomJmenuBar {
                 .buid();
 
         JMenuViewBuilder testMenuView = new JMenuViewBuilder.Builder()
-                .jMenu(new JMenu(currBundle.getString("tests_button")))
+                .jMenu(new JMenu(I18nProvider.getMessage(I18nBundles.DATA, "tests_button")))
                 .setMnemonic(KeyEvent.VK_V)
-                .setAccessibleDescription(currBundle.getString("test_commands_button"))
+                .setAccessibleDescription(I18nProvider.getMessage(I18nBundles.DATA, "test_commands_button"))
                 .addMenuItem(
                         new JmenuItemBuilder.Builder()
                                 .setMnemonic(KeyEvent.VK_S)
-                                .setText(currBundle.getString("log_msg_choises"))
+                                .setText(I18nProvider.getMessage(I18nBundles.DATA, "log_msg_choises"))
                                 .addActionListener((event) -> {
-                                    Logger.debug(currBundle.getString("test_msg_choise"));
+                                    Logger.debug(I18nProvider.getMessage(I18nBundles.DATA, "test_msg_choise"));
                                 })
                                 .buid()
                                 .jMenuItem
@@ -71,15 +75,16 @@ public class CustomJmenuBar {
                 .buid();
 
         JMenuViewBuilder setLocaleMenuView = new JMenuViewBuilder.Builder()
-                .jMenu(new JMenu(currBundle.getString("locale_button")))
+                .jMenu(new JMenu(I18nProvider.getMessage(I18nBundles.DATA, "locale_button")))
                 .setMnemonic(KeyEvent.VK_V)
-                .setAccessibleDescription(currBundle.getString("locale_description"))
+                .setAccessibleDescription(I18nProvider.getMessage(I18nBundles.DATA, "locale_description"))
                 .addMenuItem(
                         new JmenuItemBuilder.Builder()
                                 .setMnemonic(KeyEvent.VK_S)
-                                .setText(currBundle.getString("locale_US_choice"))
+                                .setText(I18nProvider.getMessage(I18nBundles.DATA, "locale_US_choice"))
                                 .addActionListener((event) -> {
                                     switchLocale(Locale.US);
+                                    this.onUiChanged();
                                 })
                                 .buid()
                                 .jMenuItem
@@ -87,9 +92,10 @@ public class CustomJmenuBar {
                 .addMenuItem(
                         new JmenuItemBuilder.Builder()
                                 .setMnemonic(KeyEvent.VK_S)
-                                .setText(currBundle.getString("locale_RU_choice"))
+                                .setText(I18nProvider.getMessage(I18nBundles.DATA, "locale_RU_choice"))
                                 .addActionListener((event) -> {
                                     switchLocale(new Locale.Builder().setLanguage("ru").setRegion("RU").build());
+                                    this.onUiChanged();
                                 })
                                 .buid()
                                 .jMenuItem
@@ -110,5 +116,10 @@ public class CustomJmenuBar {
                  | IllegalAccessException | UnsupportedLookAndFeelException e) {
 
         }
+    }
+
+    @Override
+    public void onUiChanged() {
+        super.onUiChanged();
     }
 }
