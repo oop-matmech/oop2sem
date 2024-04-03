@@ -7,6 +7,7 @@ import robots.model.log.Logger;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.util.Locale;
+
 public class CustomJmenuBar extends AbstractWindow {
     private AbstractWindow screen;
     private final JMenuBar menuBar = new JMenuBar();
@@ -19,7 +20,7 @@ public class CustomJmenuBar extends AbstractWindow {
 
     }
 
-    private void switchLocale(Locale locale){
+    private void switchLocale(Locale locale) {
         String language = locale.getLanguage();
         String country = locale.getCountry();
         var newLocale = new Locale(language, country);
@@ -28,83 +29,88 @@ public class CustomJmenuBar extends AbstractWindow {
         screen.onUiChanged();
     }
 
-    public JMenuBar generateMenuBar() {
+    public JMenu buildLookAndFeel() {
+        JMenu menu = new JMenu(I18nProvider.getMessage(I18nBundles.DATA, "view_mode_button"));
+        JMenuItem system = generateSchemeOption(I18nProvider.getMessage(I18nBundles.DATA, "sys_scheme_choice"), UIManager.getSystemLookAndFeelClassName());
+        JMenuItem universal = generateSchemeOption(I18nProvider.getMessage(I18nBundles.DATA, "universal_scheme_choice"), UIManager.getCrossPlatformLookAndFeelClassName());
 
-        JMenuViewBuilder lookAndFeelMenuView = new JMenuViewBuilder.Builder()
-                .jMenu(new JMenu(I18nProvider.getMessage(I18nBundles.DATA, "view_mode_button")))
+        JMenuViewBuilder lookBuilder = new JMenuViewBuilder.Builder()
+                .jMenu(menu)
                 .setMnemonic(KeyEvent.VK_V)
                 .setAccessibleDescription(I18nProvider.getMessage(I18nBundles.DATA, "change_view_button"))
-                .addMenuItem(
-                        new JmenuItemBuilder.Builder()
-                                .setMnemonic(KeyEvent.VK_S)
-                                .setText(I18nProvider.getMessage(I18nBundles.DATA, "sys_scheme_choice"))
-                                .addActionListener((event) -> {
-                                    setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                                    screen.invalidate();
-                                })
-                                .buid()
-                                .jMenuItem
-                )
-                .addMenuItem(
-                        new JmenuItemBuilder.Builder()
-                                .setMnemonic(KeyEvent.VK_S)
-                                .setText(I18nProvider.getMessage(I18nBundles.DATA, "universal_scheme_choice"))
-                                .addActionListener((event) -> {
-                                    setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                                    screen.invalidate();
-                                })
-                                .buid()
-                                .jMenuItem
-                )
+                .addMenuItem(universal)
+                .addMenuItem(system)
                 .buid();
 
-        JMenuViewBuilder testMenuView = new JMenuViewBuilder.Builder()
-                .jMenu(new JMenu(I18nProvider.getMessage(I18nBundles.DATA, "tests_button")))
+        return lookBuilder.jMenu;
+    }
+
+    public JMenuItem generateSchemeOption(String text, String variant) {
+        JMenuItem jMenuItem = new JmenuItemBuilder.Builder()
+                .setMnemonic(KeyEvent.VK_S)
+                .setText(text)
+                .addActionListener((event) -> {
+                    setLookAndFeel(variant);
+                    screen.invalidate();
+                })
+                .buid()
+                .jMenuItem;
+        return jMenuItem;
+    }
+
+    public JMenu buildTestMenu() {
+        JMenu testMenu = new JMenu(I18nProvider.getMessage(I18nBundles.DATA, "tests_button"));
+        JMenuViewBuilder jMenuViewBuilder = new JMenuViewBuilder.Builder()
+                .jMenu(testMenu)
                 .setMnemonic(KeyEvent.VK_V)
                 .setAccessibleDescription(I18nProvider.getMessage(I18nBundles.DATA, "test_commands_button"))
-                .addMenuItem(
-                        new JmenuItemBuilder.Builder()
-                                .setMnemonic(KeyEvent.VK_S)
-                                .setText(I18nProvider.getMessage(I18nBundles.DATA, "log_msg_choises"))
-                                .addActionListener((event) -> {
-                                    Logger.debug(I18nProvider.getMessage(I18nBundles.DATA, "test_msg_choise"));
-                                })
-                                .buid()
-                                .jMenuItem
-                )
+                .addMenuItem(buildTestMenuItem())
                 .buid();
+        return jMenuViewBuilder.jMenu;
+    }
 
-        JMenuViewBuilder setLocaleMenuView = new JMenuViewBuilder.Builder()
-                .jMenu(new JMenu(I18nProvider.getMessage(I18nBundles.DATA, "locale_button")))
+    public JMenuItem buildTestMenuItem() {
+        JMenuItem jMenuItem = new JmenuItemBuilder.Builder()
+                .setMnemonic(KeyEvent.VK_S)
+                .setText(I18nProvider.getMessage(I18nBundles.DATA, "log_msg_choises"))
+                .addActionListener((event) -> {
+                    Logger.debug(I18nProvider.getMessage(I18nBundles.DATA, "test_msg_choise"));
+                })
+                .buid()
+                .jMenuItem;
+        return jMenuItem;
+    }
+
+    public JMenu buildLanguageMenu() {
+        JMenu menu = new JMenu(I18nProvider.getMessage(I18nBundles.DATA, "locale_button"));
+        JMenuViewBuilder jMenuViewBuilder = new JMenuViewBuilder.Builder()
+                .jMenu(menu)
                 .setMnemonic(KeyEvent.VK_V)
                 .setAccessibleDescription(I18nProvider.getMessage(I18nBundles.DATA, "locale_description"))
-                .addMenuItem(
-                        new JmenuItemBuilder.Builder()
-                                .setMnemonic(KeyEvent.VK_S)
-                                .setText(I18nProvider.getMessage(I18nBundles.DATA, "locale_US_choice"))
-                                .addActionListener((event) -> {
-                                    switchLocale(Locale.US);
-                                    this.onUiChanged();
-                                })
-                                .buid()
-                                .jMenuItem
-                )
-                .addMenuItem(
-                        new JmenuItemBuilder.Builder()
-                                .setMnemonic(KeyEvent.VK_S)
-                                .setText(I18nProvider.getMessage(I18nBundles.DATA, "locale_RU_choice"))
-                                .addActionListener((event) -> {
-                                    switchLocale(new Locale.Builder().setLanguage("ru").setRegion("RU").build());
-                                    this.onUiChanged();
-                                })
-                                .buid()
-                                .jMenuItem
-                )
+                .addMenuItem(buildLanguageItem(I18nProvider.getMessage(I18nBundles.DATA, "locale_US_choice"), Locale.US))
+                .addMenuItem(buildLanguageItem(I18nProvider.getMessage(I18nBundles.DATA, "locale_RU_choice"), new Locale.Builder().setLanguage("ru").setRegion("RU").build()))
                 .buid();
+        return jMenuViewBuilder.jMenu;
+    }
 
-        menuBar.add(lookAndFeelMenuView.jMenu);
-        menuBar.add(testMenuView.jMenu);
-        menuBar.add(setLocaleMenuView.jMenu);
+    public JMenuItem buildLanguageItem(String optionTitle, Locale lc) {
+        JMenuItem jMenuItem = new JmenuItemBuilder.Builder()
+                .setMnemonic(KeyEvent.VK_S)
+                .setText(optionTitle)
+                .addActionListener((event) -> {
+                    switchLocale(lc);
+                    this.onUiChanged();
+                })
+                .buid()
+                .jMenuItem;
+        return jMenuItem;
+
+    }
+
+    public JMenuBar generateMenuBar() {
+        menuBar.add(buildLookAndFeel());
+        menuBar.add(buildTestMenu());
+        menuBar.add(buildLanguageMenu());
         return menuBar;
     }
 
@@ -121,5 +127,7 @@ public class CustomJmenuBar extends AbstractWindow {
     @Override
     public void onUiChanged() {
         super.onUiChanged();
+        menuBar.revalidate();
+        menuBar.repaint();
     }
 }
