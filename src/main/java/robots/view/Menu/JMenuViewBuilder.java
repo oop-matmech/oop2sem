@@ -1,7 +1,6 @@
-package robots.view;
+package robots.view.Menu;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
 
 public class JMenuViewBuilder {
     public JMenu jMenu;

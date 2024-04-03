@@ -3,6 +3,8 @@ package robots.view;
 import robots.model.i18n.I18nBundles;
 import robots.model.i18n.I18nProvider;
 import robots.model.log.Logger;
+import robots.view.Menu.JMenuViewBuilder;
+import robots.view.Menu.JmenuItemBuilder;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -100,17 +102,41 @@ public class CustomJmenuBar extends AbstractWindow {
                 .addActionListener((event) -> {
                     switchLocale(lc);
                     this.onUiChanged();
+                    screen.onUiChanged();
                 })
                 .buid()
                 .jMenuItem;
         return jMenuItem;
+    }
 
+    public JMenu buildExitMenu() {
+        JMenu menu = new JMenu(I18nProvider.getMessage(I18nBundles.DATA, "exit_btn"));
+        JMenuViewBuilder jMenuViewBuilder = new JMenuViewBuilder.Builder()
+                .jMenu(menu)
+                .setMnemonic(KeyEvent.VK_V)
+                .setAccessibleDescription(I18nProvider.getMessage(I18nBundles.DATA, "exit_btn"))
+                .addMenuItem(buildExitItem())
+                .buid();
+        return jMenuViewBuilder.jMenu;
+    }
+
+    public JMenuItem buildExitItem() {
+        JMenuItem jMenuItem = new JmenuItemBuilder.Builder()
+                .setMnemonic(KeyEvent.VK_S)
+                .setText(I18nProvider.getMessage(I18nBundles.DATA, "exit_btn"))
+                .addActionListener((event) -> {
+                    System.exit(0);
+                })
+                .buid()
+                .jMenuItem;
+        return jMenuItem;
     }
 
     public JMenuBar generateMenuBar() {
         menuBar.add(buildLookAndFeel());
         menuBar.add(buildTestMenu());
         menuBar.add(buildLanguageMenu());
+        menuBar.add(buildExitMenu());
         return menuBar;
     }
 
