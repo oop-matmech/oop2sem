@@ -7,13 +7,7 @@ import robots.model.log.Logger;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * ------- сделано ---------
- * Что требуется сделать:
- * 1. Метод создания меню перегружен функционалом и трудно читается.
- * Следует разделить его на серию более простых методов (или вообще выделить отдельный класс).
- */
-public class MainApplicationFrame extends AbstractWindow {
+public class MainApplicationFrame extends JFrame implements UiListener {
 
     private final JDesktopPane desktopPane = new JDesktopPane();
     private final GameWindow gameWindow = createGameWindow();
@@ -62,10 +56,18 @@ public class MainApplicationFrame extends AbstractWindow {
         frame.setVisible(true);
     }
 
+    public void updateUiFrames(){
+        for (JInternalFrame frame : desktopPane.getAllFrames()) {
+            if (frame instanceof AbstractWindow) {
+                ((AbstractWindow) frame).onUiChanged();
+            }
+        }
+
+    }
+
     @Override
     public void onUiChanged() {
-        super.onUiChanged();
-        gameWindow.onUiChanged();
-        logWindow.onUiChanged();
+        revalidate();
+        repaint();
     }
 }

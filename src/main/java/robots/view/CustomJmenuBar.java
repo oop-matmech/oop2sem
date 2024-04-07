@@ -11,10 +11,10 @@ import java.awt.event.KeyEvent;
 import java.util.Locale;
 
 public class CustomJmenuBar extends AbstractWindow {
-    private AbstractWindow screen;
+    private MainApplicationFrame screen;
     private final JMenuBar menuBar = new JMenuBar();
 
-    public CustomJmenuBar(AbstractWindow screen_) {
+    public CustomJmenuBar(MainApplicationFrame screen_) {
         screen = screen_;
     }
 
@@ -101,8 +101,7 @@ public class CustomJmenuBar extends AbstractWindow {
                 .setText(optionTitle)
                 .addActionListener((event) -> {
                     switchLocale(lc);
-                    this.onUiChanged();
-                    screen.onUiChanged();
+                    screen.updateUiFrames();
                 })
                 .buid()
                 .jMenuItem;
@@ -155,5 +154,6 @@ public class CustomJmenuBar extends AbstractWindow {
         super.onUiChanged();
         menuBar.revalidate();
         menuBar.repaint();
+        screen.onUiChanged();
     }
 }

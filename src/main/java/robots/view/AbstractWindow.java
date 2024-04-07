@@ -3,7 +3,7 @@ package robots.view;
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class AbstractWindow extends JFrame implements UiListener {
+public abstract class AbstractWindow extends JInternalFrame implements UiListener {
 
     public AbstractWindow(){
 
