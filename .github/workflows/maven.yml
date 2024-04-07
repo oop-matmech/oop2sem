@@ -37,8 +37,6 @@ jobs:
       #test coverage
       - name: Test Coverage
         uses: codecov/codecov-action@v3
-        continue-on-error: true
         with:
-          flags: APEX
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: oop-matmech/oop2sem
