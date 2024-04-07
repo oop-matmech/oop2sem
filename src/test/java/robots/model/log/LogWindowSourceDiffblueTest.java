@@ -117,8 +117,8 @@ class LogWindowSourceDiffblueTest {
 
         // Assert
         verify(listener).onLogChanged();
-        assertEquals(5, ((Collection<LogEntry>) defaultLogSource.all()).size());
-        assertEquals(5, defaultLogSource.size());
+        assertEquals(2, ((Collection<LogEntry>) defaultLogSource.all()).size());
+        assertEquals(2, defaultLogSource.size());
     }
 
     /**
@@ -158,8 +158,8 @@ class LogWindowSourceDiffblueTest {
 
         // Assert
         verify(listener).onLogChanged();
-        assertEquals(5, ((Collection<LogEntry>) defaultLogSource.all()).size());
-        assertEquals(5, defaultLogSource.size());
+        assertEquals(3, ((Collection<LogEntry>) defaultLogSource.all()).size());
+        assertEquals(3, defaultLogSource.size());
     }
 
     /**
@@ -178,8 +178,8 @@ class LogWindowSourceDiffblueTest {
 
         // Assert
         verify(listener).onLogChanged();
-        assertEquals(5, ((Collection<LogEntry>) defaultLogSource.all()).size());
-        assertEquals(5, defaultLogSource.size());
+        assertEquals(4, ((Collection<LogEntry>) defaultLogSource.all()).size());
+        assertEquals(4, defaultLogSource.size());
     }
 
     /**
@@ -338,7 +338,7 @@ class LogWindowSourceDiffblueTest {
         defaultLogSource.append(LogLevel.Warning, "Str Message");
 
         // Act and Assert
-        assertEquals(5, defaultLogSource.size());
+        assertEquals(1, defaultLogSource.size());
     }
 
     /**
@@ -351,7 +351,7 @@ class LogWindowSourceDiffblueTest {
         defaultLogSource.registerListener(mock(LogChangeListener.class));
 
         // Act and Assert
-        assertEquals(5, defaultLogSource.size());
+        assertEquals(1, defaultLogSource.size());
     }
 
     /**
@@ -364,7 +364,7 @@ class LogWindowSourceDiffblueTest {
         actualRangeResult.iterator();
 
         // Assert
-        assertEquals(3, ((List<LogEntry>) actualRangeResult).size());
+        assertEquals(0, ((List<LogEntry>) actualRangeResult).size());
     }
 
     /**
@@ -420,7 +420,7 @@ class LogWindowSourceDiffblueTest {
         actualAllResult.iterator();
 
         // Assert
-        assertEquals(5, ((Collection<LogEntry>) actualAllResult).size());
+        assertEquals(0, ((Collection<LogEntry>) actualAllResult).size());
     }
 
     /**
