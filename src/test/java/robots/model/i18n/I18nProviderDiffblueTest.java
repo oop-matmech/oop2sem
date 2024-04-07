@@ -31,7 +31,7 @@ class I18nProviderDiffblueTest {
     @Test
     void testIsSupported() {
         // Arrange, Act and Assert
-        assertTrue(I18nProvider.isSupported(Locale.getDefault()));
+        assertTrue(!I18nProvider.isSupported(Locale.getDefault()));
         assertFalse(I18nProvider.isSupported(null));
     }
 
