@@ -1,8 +1,10 @@
-package robots.view;
+package robots.view.Menu;
 
 import robots.model.i18n.I18nBundles;
 import robots.model.i18n.I18nProvider;
 import robots.model.log.Logger;
+import robots.view.AbstractWindow;
+import robots.view.MainApplicationFrame;
 import robots.view.Menu.JMenuViewBuilder;
 import robots.view.Menu.JmenuItemBuilder;
 
@@ -10,7 +12,7 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.util.Locale;
 
-public class CustomJmenuBar extends AbstractWindow {
+public class CustomJmenuBar {
     private MainApplicationFrame screen;
     private final JMenuBar menuBar = new JMenuBar();
 
@@ -27,8 +29,7 @@ public class CustomJmenuBar extends AbstractWindow {
         String country = locale.getCountry();
         var newLocale = new Locale(language, country);
         I18nProvider.setLocale(newLocale);
-        this.onUiChanged();
-        screen.onUiChanged();
+        screen.updateDesktopPane();
     }
 
     public JMenu buildLookAndFeel() {
@@ -89,8 +90,14 @@ public class CustomJmenuBar extends AbstractWindow {
                 .jMenu(menu)
                 .setMnemonic(KeyEvent.VK_V)
                 .setAccessibleDescription(I18nProvider.getMessage(I18nBundles.DATA, "locale_description"))
-                .addMenuItem(buildLanguageItem(I18nProvider.getMessage(I18nBundles.DATA, "locale_US_choice"), Locale.US))
-                .addMenuItem(buildLanguageItem(I18nProvider.getMessage(I18nBundles.DATA, "locale_RU_choice"), new Locale.Builder().setLanguage("ru").setRegion("RU").build()))
+                .addMenuItem(buildLanguageItem(
+                        I18nProvider.getMessage(I18nBundles.DATA, "locale_US_choice"),
+                        Locale.US
+                ))
+                .addMenuItem(buildLanguageItem(
+                        I18nProvider.getMessage(I18nBundles.DATA, "locale_RU_choice"),
+                        new Locale.Builder().setLanguage("ru").setRegion("RU").build()
+                ))
                 .buid();
         return jMenuViewBuilder.jMenu;
     }
@@ -124,7 +131,24 @@ public class CustomJmenuBar extends AbstractWindow {
                 .setMnemonic(KeyEvent.VK_S)
                 .setText(I18nProvider.getMessage(I18nBundles.DATA, "exit_btn"))
                 .addActionListener((event) -> {
-                    System.exit(0);
+                    Object[] options = {
+                            I18nProvider.getMessage(I18nBundles.DATA, "yes"),
+                            I18nProvider.getMessage(I18nBundles.DATA, "no"),
+                    };
+
+                    int result = JOptionPane.showOptionDialog(
+                            null,
+                            I18nProvider.getMessage(I18nBundles.DATA, "close"),
+                            I18nProvider.getMessage(I18nBundles.DATA, "confirm"),
+                            JOptionPane.DEFAULT_OPTION,
+                            JOptionPane.WARNING_MESSAGE,
+                            null,
+                            options,
+                            options[0]
+                    );
+                    if (result == JOptionPane.YES_OPTION) {
+                        System.exit(0);
+                    }
                 })
                 .buid()
                 .jMenuItem;
@@ -147,13 +171,5 @@ public class CustomJmenuBar extends AbstractWindow {
                  | IllegalAccessException | UnsupportedLookAndFeelException e) {
 
         }
-    }
-
-    @Override
-    public void onUiChanged() {
-        super.onUiChanged();
-        menuBar.revalidate();
-        menuBar.repaint();
-        screen.onUiChanged();
     }
 }

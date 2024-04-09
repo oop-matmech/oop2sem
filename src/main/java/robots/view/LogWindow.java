@@ -10,14 +10,12 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class LogWindow extends JInternalFrame implements LogChangeListener {
+public class LogWindow extends AbstractWindow implements LogChangeListener {
     private LogWindowSource m_logSource;
     private TextArea m_logContent;
 
     public LogWindow(LogWindowSource logSource) {
-//        super(ResourceBundle.getBundle("log_window", Locale.getDefault()).getString("log_window_name"), true, true, true, true);
-        super(I18nProvider.getMessage(I18nBundles.LOG_WINDOW, "log_window_name"));
-        // super("Протокол работы", true, true, true, true);
+        super(I18nProvider.getMessage(I18nBundles.LOG_WINDOW, "log_window_name"), true, true, true, true);
         m_logSource = logSource;
         m_logSource.registerListener(this);
         m_logContent = new TextArea("");
@@ -54,5 +52,10 @@ public class LogWindow extends JInternalFrame implements LogChangeListener {
         setTitle(I18nProvider.getMessage(I18nBundles.LOG_WINDOW, "log_window_name"));
         revalidate();
         repaint();
+    }
+
+    @Override
+    protected void closeWindow() {
+        m_logSource.unregisterListener(this);
     }
 }

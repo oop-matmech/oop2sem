@@ -3,15 +3,17 @@ package robots.view;
 import robots.model.i18n.I18nBundles;
 import robots.model.i18n.I18nProvider;
 import robots.model.log.Logger;
+import robots.view.Menu.CustomJmenuBar;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class MainApplicationFrame extends JFrame implements UiListener {
+public class MainApplicationFrame extends JFrame {
 
     private final JDesktopPane desktopPane = new JDesktopPane();
     private final GameWindow gameWindow = createGameWindow();
-
     private final LogWindow logWindow = createLogWindow();
 
     public MainApplicationFrame() {
@@ -32,7 +34,32 @@ public class MainApplicationFrame extends JFrame implements UiListener {
 
         CustomJmenuBar customJmenuBar = new CustomJmenuBar(this);
         setJMenuBar(customJmenuBar.generateMenuBar());
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Object[] options = {
+                        I18nProvider.getMessage(I18nBundles.DATA, "yes"),
+                        I18nProvider.getMessage(I18nBundles.DATA, "no")
+                };
+
+                int result = JOptionPane.showOptionDialog(
+                        null,
+                        I18nProvider.getMessage(I18nBundles.DATA, "close"),
+                        I18nProvider.getMessage(I18nBundles.DATA, "confirm"),
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.WARNING_MESSAGE,
+                        null,
+                        options,
+                        options[0]
+                );
+                if (result == JOptionPane.YES_OPTION) {
+                    globalClose();
+                    dispose();
+                    System.exit(0);
+                }
+            }
+        });
     }
 
     protected LogWindow createLogWindow() {
@@ -45,7 +72,7 @@ public class MainApplicationFrame extends JFrame implements UiListener {
         return logWindow;
     }
 
-    protected GameWindow createGameWindow(){
+    protected GameWindow createGameWindow() {
         GameWindow gameWindow = new GameWindow();
         gameWindow.setSize(400, 400);
         return gameWindow;
@@ -56,7 +83,7 @@ public class MainApplicationFrame extends JFrame implements UiListener {
         frame.setVisible(true);
     }
 
-    public void updateUiFrames(){
+    public void updateUiFrames() {
         for (JInternalFrame frame : desktopPane.getAllFrames()) {
             if (frame instanceof AbstractWindow) {
                 ((AbstractWindow) frame).onUiChanged();
@@ -65,9 +92,26 @@ public class MainApplicationFrame extends JFrame implements UiListener {
 
     }
 
-    @Override
-    public void onUiChanged() {
-        revalidate();
-        repaint();
+    private void globalClose() {
+        for (JInternalFrame frame : desktopPane.getAllFrames()) {
+            if (frame instanceof AbstractWindow) {
+                frame.dispose();
+            }
+        }
+    }
+
+    public void updateDesktopPane() {
+        for (JInternalFrame frame : desktopPane.getAllFrames()) {
+            if (frame instanceof AbstractWindow) {
+                ((AbstractWindow) frame).onUiChanged();
+            }
+        }
+        updateMainFrame();
+    }
+    public void updateMainFrame() {
+        CustomJmenuBar customJmenuBar = new CustomJmenuBar(this);
+        setJMenuBar(customJmenuBar.generateMenuBar());
+        desktopPane.revalidate();
+        desktopPane.repaint();
     }
 }

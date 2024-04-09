@@ -28,17 +28,11 @@ public class I18nProvider {
     }
 
     public static String getBundleKeyString(I18nBundles bundleKey) {
-        switch (bundleKey) {
-            case LOG_WINDOW -> {
-                return "log_window";
-            }
-            case GAME_WINDOW -> {
-                return "game_window";
-            }
-            default -> {
-                return "data";
-            }
-        }
+        return switch (bundleKey) {
+            case LOG_WINDOW -> "log_window";
+            case GAME_WINDOW -> "game_window";
+            default -> "data";
+        };
     }
 
     public static String getMessage(I18nBundles bundleKey, String key) {

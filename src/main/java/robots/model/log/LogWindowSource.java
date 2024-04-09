@@ -68,7 +68,7 @@ public class LogWindowSource {
     }
 
     public int size() {
-        return mCounter.get();
+        return m_messages.size();
     }
 
     public Iterable<LogEntry> range(int startFrom, int count) {
