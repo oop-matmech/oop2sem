@@ -4,6 +4,8 @@ import robots.model.i18n.I18nBundles;
 import robots.model.i18n.I18nProvider;
 import robots.model.log.Logger;
 import robots.view.Menu.CustomJmenuBar;
+import robots.view.windows.GameWindow;
+import robots.view.windows.LogWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,8 +15,6 @@ import java.awt.event.WindowEvent;
 public class MainApplicationFrame extends JFrame {
 
     private final JDesktopPane desktopPane = new JDesktopPane();
-    private final GameWindow gameWindow = createGameWindow();
-    private final LogWindow logWindow = createLogWindow();
 
     public MainApplicationFrame() {
         //Make the big window be indented 50 pixels from each edge
@@ -29,12 +29,15 @@ public class MainApplicationFrame extends JFrame {
 
         setContentPane(desktopPane);
 
+        LogWindow logWindow = createLogWindow();
         addWindow(logWindow);
+        GameWindow gameWindow = createGameWindow();
         addWindow(gameWindow);
 
         CustomJmenuBar customJmenuBar = new CustomJmenuBar(this);
         setJMenuBar(customJmenuBar.generateMenuBar());
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

@@ -1,10 +1,11 @@
-package robots.view;
+package robots.view.windows;
 
 import robots.model.i18n.I18nBundles;
 import robots.model.i18n.I18nProvider;
 import robots.model.log.LogChangeListener;
 import robots.model.log.LogEntry;
 import robots.model.log.LogWindowSource;
+import robots.view.AbstractWindow;
 
 import javax.swing.*;
 import java.awt.*;
