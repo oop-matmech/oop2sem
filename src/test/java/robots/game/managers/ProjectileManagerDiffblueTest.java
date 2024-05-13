@@ -11,20 +11,19 @@ import java.awt.geom.Point2D;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import robots.game.enemies.Bat;
-import robots.game.enemies.Enemy;
-import robots.game.main.Game;
-import robots.game.objects.PathPoint;
-import robots.game.objects.Tower;
-import robots.game.scenes.Playing;
+import robots.model.enemies.Bat;
+import robots.model.enemies.Enemy;
+import robots.model.main.Game;
+import robots.model.managers.ProjectileManager;
+import robots.model.objects.PathPoint;
+import robots.model.objects.Tower;
+import robots.view.scenes.Playing;
 
 class ProjectileManagerDiffblueTest {
     /**
      * Methods under test:
      *
      * <ul>
-     *   <li>
-     * {@link ProjectileManager.Explosion#Explosion(ProjectileManager, Point2D.Float)}
      *   <li>{@link ProjectileManager.Explosion#getIndex()}
      *   <li>{@link ProjectileManager.Explosion#getPos()}
      * </ul>

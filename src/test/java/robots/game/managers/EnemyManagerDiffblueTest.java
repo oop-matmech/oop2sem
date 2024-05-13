@@ -12,10 +12,12 @@ import javax.swing.DebugGraphics;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import robots.game.enemies.Enemy;
-import robots.game.main.Game;
-import robots.game.objects.PathPoint;
-import robots.game.scenes.Playing;
+import robots.model.enemies.Enemy;
+import robots.model.main.Game;
+import robots.model.objects.PathPoint;
+import robots.model.managers.EnemyManager;
+import robots.model.managers.TileManager;
+import robots.view.scenes.Playing;
 
 class EnemyManagerDiffblueTest {
     /**

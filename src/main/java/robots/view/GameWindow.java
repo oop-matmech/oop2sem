@@ -1,6 +1,6 @@
 package robots.view;
 
-import robots.game.main.Game;
+import robots.model.main.Game;
 import robots.model.i18n.I18nBundles;
 import robots.model.i18n.I18nProvider;
 
