@@ -1,4 +1,4 @@
-package robots.model.managers;
+package robots.managers;
 
 import robots.model.enemies.*;
 import robots.model.helpz.LoadSave;

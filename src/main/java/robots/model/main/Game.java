@@ -1,7 +1,7 @@
 package robots.model.main;
 
 import robots.model.helpz.LoadSave;
-import robots.model.managers.TileManager;
+import robots.managers.TileManager;
 import robots.view.scenes.Editing;
 import robots.view.scenes.GameOver;
 import robots.view.scenes.Menu;

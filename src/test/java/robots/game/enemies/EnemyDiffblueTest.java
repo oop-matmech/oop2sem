@@ -15,8 +15,8 @@ import org.junit.jupiter.api.Test;
 import robots.model.enemies.Bat;
 import robots.model.enemies.Enemy;
 import robots.model.main.Game;
-import robots.model.managers.EnemyManager;
-import robots.model.managers.TileManager;
+import robots.managers.EnemyManager;
+import robots.managers.TileManager;
 import robots.model.objects.PathPoint;
 import robots.view.scenes.Playing;
 

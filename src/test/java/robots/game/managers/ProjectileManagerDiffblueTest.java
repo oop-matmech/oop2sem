@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import robots.model.enemies.Bat;
 import robots.model.enemies.Enemy;
 import robots.model.main.Game;
-import robots.model.managers.ProjectileManager;
+import robots.managers.ProjectileManager;
 import robots.model.objects.PathPoint;
 import robots.model.objects.Tower;
 import robots.view.scenes.Playing;

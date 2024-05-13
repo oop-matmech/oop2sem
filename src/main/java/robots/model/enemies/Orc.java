@@ -1,6 +1,6 @@
 package robots.model.enemies;
 
-import robots.model.managers.EnemyManager;
+import robots.managers.EnemyManager;
 
 import static robots.model.helpz.Constants.Enemies.ORC;
 

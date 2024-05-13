@@ -1,4 +1,4 @@
-package robots.model.managers;
+package robots.managers;
 
 import robots.model.events.Wave;
 import robots.view.scenes.Playing;

@@ -1,7 +1,7 @@
 package robots.model.enemies;
 
 import robots.model.helpz.Constants;
-import robots.model.managers.EnemyManager;
+import robots.managers.EnemyManager;
 
 import java.awt.*;
 

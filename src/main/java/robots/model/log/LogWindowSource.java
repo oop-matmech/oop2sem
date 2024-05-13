@@ -59,12 +59,16 @@ public class LogWindowSource {
     public synchronized void triggerLogs() {
         LogChangeListener[] activeListeners = m_activeListeners;
         if (activeListeners == null) {
-            m_activeListeners = m_listeners.toArray(new LogChangeListener[0]);
+            updateActiveListeners();
             activeListeners = m_activeListeners;
         }
         for (LogChangeListener listener : activeListeners) {
             listener.onLogChanged();
         }
+    }
+
+    public synchronized void updateActiveListeners() {
+        m_activeListeners = m_listeners.toArray(new LogChangeListener[0]);
     }
 
     public int size() {

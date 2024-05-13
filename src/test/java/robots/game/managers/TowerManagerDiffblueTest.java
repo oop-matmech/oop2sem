@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import robots.model.managers.TowerManager;
+import robots.managers.TowerManager;
 import robots.model.objects.Tower;
 import robots.view.scenes.Playing;
 

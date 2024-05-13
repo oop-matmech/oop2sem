@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import robots.model.objects.Tile;
-import robots.model.managers.TileManager;
+import robots.managers.TileManager;
 
 class TileManagerDiffblueTest {
     /**

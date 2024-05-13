@@ -1,4 +1,4 @@
-package robots.model.managers;
+package robots.managers;
 
 import robots.model.enemies.Enemy;
 import robots.model.helpz.Constants;

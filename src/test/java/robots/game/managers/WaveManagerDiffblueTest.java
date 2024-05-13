@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import robots.model.events.Wave;
 import robots.model.main.Game;
-import robots.model.managers.TileManager;
-import robots.model.managers.WaveManager;
+import robots.managers.TileManager;
+import robots.managers.WaveManager;
 import robots.view.scenes.Playing;
 
 class WaveManagerDiffblueTest {
