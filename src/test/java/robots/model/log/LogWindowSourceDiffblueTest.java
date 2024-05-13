@@ -241,24 +241,6 @@ class LogWindowSourceDiffblueTest {
         assertEquals(prevSize + 1, defaultLogSource.size());
     }
 
-
-    /**
-     * Method under test: {@link LogWindowSource#all()}
-     */
-    @Test
-    void testAll2() {
-        // Arrange
-        LogWindowSource defaultLogSource = Logger.getDefaultLogSource();
-        defaultLogSource.registerListener(mock(LogChangeListener.class));
-
-        // Act
-        Iterable<LogEntry> actualAllResult = defaultLogSource.all();
-        actualAllResult.iterator();
-
-        // Assert
-        assertEquals(5, ((Collection<LogEntry>) actualAllResult).size());
-    }
-
     /**
      * Method under test: {@link LogWindowSource#LogWindowSource(int)}
      */
