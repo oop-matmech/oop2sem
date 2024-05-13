@@ -15,7 +15,7 @@ public class LogWindow extends AbstractWindow implements LogChangeListener {
     private TextArea m_logContent;
 
     public LogWindow(LogWindowSource logSource) {
-        super(I18nProvider.getMessage(I18nBundles.LOG_WINDOW, "log_window_name"), true, true, true, true);
+        super(I18nProvider.getLogWindowMessage("log_window_name"), true, true, true, true);
         m_logSource = logSource;
         m_logSource.registerListener(this);
         m_logContent = new TextArea("");
@@ -49,7 +49,7 @@ public class LogWindow extends AbstractWindow implements LogChangeListener {
     }
 
     public void onUiChanged() {
-        setTitle(I18nProvider.getMessage(I18nBundles.LOG_WINDOW, "log_window_name"));
+        setTitle(I18nProvider.getLogWindowMessage("log_window_name"));
         revalidate();
         repaint();
     }

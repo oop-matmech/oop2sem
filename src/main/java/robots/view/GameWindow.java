@@ -7,7 +7,7 @@ import robots.model.i18n.I18nProvider;
 public class GameWindow extends AbstractWindow {
 
     public GameWindow() {
-        super(I18nProvider.getMessage(I18nBundles.GAME_WINDOW, "game_window_name"), true, true, true, true);
+        super(I18nProvider.getGameMessage("game_window_name"), true, true, true, true);
         Game game = new Game();
         game.gameScreen.initInputs();
         game.start();
@@ -18,7 +18,7 @@ public class GameWindow extends AbstractWindow {
 
     @Override
     public void onUiChanged() {
-        setTitle(I18nProvider.getMessage(I18nBundles.GAME_WINDOW, "game_window_name"));
+        setTitle(I18nProvider.getGameMessage("game_window_name"));
         revalidate();
         repaint();
     }

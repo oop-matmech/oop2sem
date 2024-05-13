@@ -2159,6 +2159,6 @@ class I18nProviderDiffblueTest {
         //   See https://diff.blue/R013 to resolve this issue.
 
         // Arrange and Act
-        I18nProvider.getMessage(I18nBundles.DATA, "Key");
+        I18nProvider.getDataMessage("Key");
     }
 }

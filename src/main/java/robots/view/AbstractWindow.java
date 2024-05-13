@@ -17,14 +17,14 @@ public abstract class AbstractWindow extends JInternalFrame implements UiChanged
             @Override
             public void internalFrameClosing(InternalFrameEvent e) {
                 Object[] options = {
-                        I18nProvider.getMessage(I18nBundles.DATA, "yes"),
-                        I18nProvider.getMessage(I18nBundles.DATA, "no"),
+                        I18nProvider.getDataMessage("yes"),
+                        I18nProvider.getDataMessage("no"),
                 };
 
                 int result = JOptionPane.showOptionDialog(
                         AbstractWindow.this,
-                        I18nProvider.getMessage(I18nBundles.DATA, "close"),
-                        I18nProvider.getMessage(I18nBundles.DATA, "confirm"),
+                        I18nProvider.getDataMessage("close"),
+                        I18nProvider.getDataMessage("confirm"),
                         JOptionPane.DEFAULT_OPTION,
                         JOptionPane.WARNING_MESSAGE,
                         null,

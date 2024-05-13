@@ -40,6 +40,8 @@ public class GameOver extends GameScene implements SceneMethods {
 
 		// buttons
 		g.setFont(new Font("LucidaSans", Font.BOLD, 20));
+		bMenu.setText(I18nProvider.getGameMessage("game_menu_title"));
+		bReplay.setText(I18nProvider.getGameMessage("game_replay_btn"));
 		bMenu.draw(g);
 		bReplay.draw(g);
 	}

@@ -39,14 +39,14 @@ public class MainApplicationFrame extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 Object[] options = {
-                        I18nProvider.getMessage(I18nBundles.DATA, "yes"),
-                        I18nProvider.getMessage(I18nBundles.DATA, "no")
+                        I18nProvider.getDataMessage("yes"),
+                        I18nProvider.getDataMessage("no")
                 };
 
                 int result = JOptionPane.showOptionDialog(
                         null,
-                        I18nProvider.getMessage(I18nBundles.DATA, "close"),
-                        I18nProvider.getMessage(I18nBundles.DATA, "confirm"),
+                        I18nProvider.getDataMessage("close"),
+                        I18nProvider.getDataMessage("confirm"),
                         JOptionPane.DEFAULT_OPTION,
                         JOptionPane.WARNING_MESSAGE,
                         null,
@@ -68,7 +68,7 @@ public class MainApplicationFrame extends JFrame {
         logWindow.setSize(300, 800);
         setMinimumSize(logWindow.getSize());
         logWindow.pack();
-        Logger.debug(I18nProvider.getMessage(I18nBundles.LOG_WINDOW, "log_default_msg"));
+        Logger.debug(I18nProvider.getLogWindowMessage("log_default_msg"));
         return logWindow;
     }
 

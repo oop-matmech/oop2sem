@@ -30,14 +30,14 @@ public class CustomJmenuBar {
     }
 
     public JMenu buildLookAndFeel() {
-        JMenu menu = new JMenu(I18nProvider.getMessage(I18nBundles.DATA, "view_mode_button"));
-        JMenuItem system = generateSchemeOption(I18nProvider.getMessage(I18nBundles.DATA, "sys_scheme_choice"), UIManager.getSystemLookAndFeelClassName());
-        JMenuItem universal = generateSchemeOption(I18nProvider.getMessage(I18nBundles.DATA, "universal_scheme_choice"), UIManager.getCrossPlatformLookAndFeelClassName());
+        JMenu menu = new JMenu(I18nProvider.getDataMessage("view_mode_button"));
+        JMenuItem system = generateSchemeOption(I18nProvider.getDataMessage("sys_scheme_choice"), UIManager.getSystemLookAndFeelClassName());
+        JMenuItem universal = generateSchemeOption(I18nProvider.getDataMessage("universal_scheme_choice"), UIManager.getCrossPlatformLookAndFeelClassName());
 
         JMenuViewBuilder lookBuilder = new JMenuViewBuilder.Builder()
                 .jMenu(menu)
                 .setMnemonic(KeyEvent.VK_V)
-                .setAccessibleDescription(I18nProvider.getMessage(I18nBundles.DATA, "change_view_button"))
+                .setAccessibleDescription(I18nProvider.getDataMessage("change_view_button"))
                 .addMenuItem(universal)
                 .addMenuItem(system)
                 .buid();
@@ -59,11 +59,11 @@ public class CustomJmenuBar {
     }
 
     public JMenu buildTestMenu() {
-        JMenu testMenu = new JMenu(I18nProvider.getMessage(I18nBundles.DATA, "tests_button"));
+        JMenu testMenu = new JMenu(I18nProvider.getDataMessage("tests_button"));
         JMenuViewBuilder jMenuViewBuilder = new JMenuViewBuilder.Builder()
                 .jMenu(testMenu)
                 .setMnemonic(KeyEvent.VK_V)
-                .setAccessibleDescription(I18nProvider.getMessage(I18nBundles.DATA, "test_commands_button"))
+                .setAccessibleDescription(I18nProvider.getDataMessage("test_commands_button"))
                 .addMenuItem(buildTestMenuItem())
                 .buid();
         return jMenuViewBuilder.jMenu;
@@ -72,9 +72,9 @@ public class CustomJmenuBar {
     public JMenuItem buildTestMenuItem() {
         JMenuItem jMenuItem = new JmenuItemBuilder.Builder()
                 .setMnemonic(KeyEvent.VK_S)
-                .setText(I18nProvider.getMessage(I18nBundles.DATA, "log_msg_choises"))
+                .setText(I18nProvider.getDataMessage("log_msg_choises"))
                 .addActionListener((event) -> {
-                    Logger.debug(I18nProvider.getMessage(I18nBundles.DATA, "test_msg_choise"));
+                    Logger.debug(I18nProvider.getDataMessage("test_msg_choise"));
                 })
                 .buid()
                 .jMenuItem;
@@ -82,17 +82,17 @@ public class CustomJmenuBar {
     }
 
     public JMenu buildLanguageMenu() {
-        JMenu menu = new JMenu(I18nProvider.getMessage(I18nBundles.DATA, "locale_button"));
+        JMenu menu = new JMenu(I18nProvider.getDataMessage("locale_button"));
         JMenuViewBuilder jMenuViewBuilder = new JMenuViewBuilder.Builder()
                 .jMenu(menu)
                 .setMnemonic(KeyEvent.VK_V)
-                .setAccessibleDescription(I18nProvider.getMessage(I18nBundles.DATA, "locale_description"))
+                .setAccessibleDescription(I18nProvider.getDataMessage("locale_description"))
                 .addMenuItem(buildLanguageItem(
-                        I18nProvider.getMessage(I18nBundles.DATA, "locale_US_choice"),
+                        I18nProvider.getDataMessage("locale_US_choice"),
                         Locale.US
                 ))
                 .addMenuItem(buildLanguageItem(
-                        I18nProvider.getMessage(I18nBundles.DATA, "locale_RU_choice"),
+                        I18nProvider.getDataMessage("locale_RU_choice"),
                         new Locale.Builder().setLanguage("ru").setRegion("RU").build()
                 ))
                 .buid();
@@ -113,11 +113,11 @@ public class CustomJmenuBar {
     }
 
     public JMenu buildExitMenu() {
-        JMenu menu = new JMenu(I18nProvider.getMessage(I18nBundles.DATA, "exit_btn"));
+        JMenu menu = new JMenu(I18nProvider.getDataMessage("exit_btn"));
         JMenuViewBuilder jMenuViewBuilder = new JMenuViewBuilder.Builder()
                 .jMenu(menu)
                 .setMnemonic(KeyEvent.VK_V)
-                .setAccessibleDescription(I18nProvider.getMessage(I18nBundles.DATA, "exit_btn"))
+                .setAccessibleDescription(I18nProvider.getDataMessage("exit_btn"))
                 .addMenuItem(buildExitItem())
                 .buid();
         return jMenuViewBuilder.jMenu;
@@ -126,17 +126,17 @@ public class CustomJmenuBar {
     public JMenuItem buildExitItem() {
         JMenuItem jMenuItem = new JmenuItemBuilder.Builder()
                 .setMnemonic(KeyEvent.VK_S)
-                .setText(I18nProvider.getMessage(I18nBundles.DATA, "exit_btn"))
+                .setText(I18nProvider.getDataMessage("exit_btn"))
                 .addActionListener((event) -> {
                     Object[] options = {
-                            I18nProvider.getMessage(I18nBundles.DATA, "yes"),
-                            I18nProvider.getMessage(I18nBundles.DATA, "no"),
+                            I18nProvider.getDataMessage("yes"),
+                            I18nProvider.getDataMessage("no"),
                     };
 
                     int result = JOptionPane.showOptionDialog(
                             null,
-                            I18nProvider.getMessage(I18nBundles.DATA, "close"),
-                            I18nProvider.getMessage(I18nBundles.DATA, "confirm"),
+                            I18nProvider.getDataMessage("close"),
+                            I18nProvider.getDataMessage("confirm"),
                             JOptionPane.DEFAULT_OPTION,
                             JOptionPane.WARNING_MESSAGE,
                             null,
