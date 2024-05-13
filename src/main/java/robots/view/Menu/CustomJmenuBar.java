@@ -3,10 +3,7 @@ package robots.view.Menu;
 import robots.model.i18n.I18nBundles;
 import robots.model.i18n.I18nProvider;
 import robots.model.log.Logger;
-import robots.view.AbstractWindow;
 import robots.view.MainApplicationFrame;
-import robots.view.Menu.JMenuViewBuilder;
-import robots.view.Menu.JmenuItemBuilder;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

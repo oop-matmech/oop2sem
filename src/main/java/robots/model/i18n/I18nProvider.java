@@ -43,4 +43,16 @@ public class I18nProvider {
     public static String getMessage(String key, Object... arguments) {
         return MessageFormat.format(getMessage(key), arguments);
     }
+
+    public static String getGameMessage(String key) {
+        return I18nProvider.getMessage(I18nBundles.GAME_WINDOW, key);
+    }
+
+    public static String getLogWindowMessage(String key) {
+        return I18nProvider.getMessage(I18nBundles.LOG_WINDOW, key);
+    }
+
+    public static String getDataMessage(String key) {
+        return I18nProvider.getMessage(I18nBundles.DATA, key);
+    }
 }
