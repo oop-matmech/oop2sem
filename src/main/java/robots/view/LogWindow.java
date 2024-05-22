@@ -1,5 +1,6 @@
 package robots.view;
 
+import robots.model.helpz.profileManager;
 import robots.model.i18n.I18nBundles;
 import robots.model.i18n.I18nProvider;
 import robots.model.log.LogChangeListener;
@@ -57,5 +58,6 @@ public class LogWindow extends AbstractWindow implements LogChangeListener {
     @Override
     protected void closeWindow() {
         m_logSource.unregisterListener(this);
+        profileManager.setLogWindowIsClosed(true);
     }
 }

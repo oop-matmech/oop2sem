@@ -1,6 +1,6 @@
 package robots.view;
 
-import robots.model.i18n.I18nBundles;
+import robots.model.helpz.profileManager;
 import robots.model.i18n.I18nProvider;
 import robots.model.log.Logger;
 import robots.view.Menu.CustomJmenuBar;
@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Locale;
 
 public class MainApplicationFrame extends JFrame {
 
@@ -54,6 +55,9 @@ public class MainApplicationFrame extends JFrame {
                         options[0]
                 );
                 if (result == JOptionPane.YES_OPTION) {
+                    profileManager.setGameWindowPos(getGameWindowPos());
+                    profileManager.setLogWindowPos(logWindow.getLocationOnScreen());
+                    profileManager.WriteToFile();
                     globalClose();
                     dispose();
                     System.exit(0);
@@ -69,6 +73,7 @@ public class MainApplicationFrame extends JFrame {
         setMinimumSize(logWindow.getSize());
         logWindow.pack();
         Logger.debug(I18nProvider.getLogWindowMessage("log_default_msg"));
+        Logger.debug(I18nProvider.getLogWindowMessage("curr_locale_is_msg") + String.valueOf(Locale.getDefault()));
         return logWindow;
     }
 
@@ -113,5 +118,12 @@ public class MainApplicationFrame extends JFrame {
         setJMenuBar(customJmenuBar.generateMenuBar());
         desktopPane.revalidate();
         desktopPane.repaint();
+    }
+
+    public Point getGameWindowPos() {
+        return gameWindow.getLocationOnScreen();
+    }
+    public Point getLogWindowPos() {
+        return logWindow.getLocationOnScreen();
     }
 }

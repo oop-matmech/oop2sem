@@ -1,5 +1,6 @@
 package robots.view;
 
+import robots.model.helpz.profileManager;
 import robots.model.main.Game;
 import robots.model.i18n.I18nBundles;
 import robots.model.i18n.I18nProvider;
@@ -11,7 +12,7 @@ public class GameWindow extends AbstractWindow {
         Game game = new Game();
         game.gameScreen.initInputs();
         game.start();
-		setResizable(false);
+        //  setResizable(false);
         getContentPane().add(game.gameScreen);
         pack();
     }
@@ -25,6 +26,6 @@ public class GameWindow extends AbstractWindow {
 
     @Override
     protected void closeWindow() {
-
+        profileManager.setGameWindowIsClosed(true);
     }
 }

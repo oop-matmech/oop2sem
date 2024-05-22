@@ -1,5 +1,6 @@
 package robots.view.Menu;
 
+import robots.model.helpz.profileManager;
 import robots.model.i18n.I18nBundles;
 import robots.model.i18n.I18nProvider;
 import robots.model.log.Logger;
@@ -26,6 +27,7 @@ public class CustomJmenuBar {
         String country = locale.getCountry();
         var newLocale = new Locale(language, country);
         I18nProvider.setLocale(newLocale);
+        Logger.debug(I18nProvider.getLogWindowMessage("curr_locale_is_msg") + String.valueOf(Locale.getDefault()));
         screen.updateDesktopPane();
     }
 
@@ -65,6 +67,7 @@ public class CustomJmenuBar {
                 .setMnemonic(KeyEvent.VK_V)
                 .setAccessibleDescription(I18nProvider.getDataMessage("test_commands_button"))
                 .addMenuItem(buildTestMenuItem())
+                .addMenuItem(buildGamePosMenuItem())
                 .buid();
         return jMenuViewBuilder.jMenu;
     }
@@ -75,6 +78,18 @@ public class CustomJmenuBar {
                 .setText(I18nProvider.getDataMessage("log_msg_choises"))
                 .addActionListener((event) -> {
                     Logger.debug(I18nProvider.getDataMessage("test_msg_choise"));
+                })
+                .buid()
+                .jMenuItem;
+        return jMenuItem;
+    }
+
+    public JMenuItem buildGamePosMenuItem() {
+        JMenuItem jMenuItem = new JmenuItemBuilder.Builder()
+                .setMnemonic(KeyEvent.VK_S)
+                .setText(I18nProvider.getLogWindowMessage("game_pos_choice"))
+                .addActionListener((event) -> {
+                    Logger.debug(I18nProvider.getLogWindowMessage("game_pos_does") + screen.getGameWindowPos().getX() + " " + screen.getGameWindowPos().getY());
                 })
                 .buid()
                 .jMenuItem;
@@ -106,6 +121,7 @@ public class CustomJmenuBar {
                 .addActionListener((event) -> {
                     switchLocale(lc);
                     screen.updateUiFrames();
+                    profileManager.setCurrentLocale(lc);
                 })
                 .buid()
                 .jMenuItem;
@@ -143,6 +159,11 @@ public class CustomJmenuBar {
                             options,
                             options[0]
                     );
+
+                    profileManager.setGameWindowPos(screen.getGameWindowPos());
+                    profileManager.setLogWindowPos(screen.getLogWindowPos());
+                    profileManager.WriteToFile();
+
                     if (result == JOptionPane.YES_OPTION) {
                         System.exit(0);
                     }

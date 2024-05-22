@@ -2,6 +2,7 @@ package robots.model.main;
 
 import robots.model.helpz.LoadSave;
 import robots.managers.TileManager;
+import robots.model.helpz.profileManager;
 import robots.view.scenes.Editing;
 import robots.view.scenes.GameOver;
 import robots.view.scenes.Menu;
@@ -29,6 +30,7 @@ public class Game extends JPanel implements Runnable {
 	public Game() {
 
 		LoadSave.CreateFolder();
+		profileManager.CreateFolder();
 
 		createDefaultLevel();
 		initClasses();
