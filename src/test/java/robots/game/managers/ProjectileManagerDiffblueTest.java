@@ -17,9 +17,11 @@ import robots.model.main.Game;
 import robots.managers.ProjectileManager;
 import robots.model.objects.PathPoint;
 import robots.model.objects.Tower;
+import robots.view.MainApplicationFrame;
 import robots.view.scenes.Playing;
 
 class ProjectileManagerDiffblueTest {
+    MainApplicationFrame test = new MainApplicationFrame();
     /**
      * Methods under test:
      *
@@ -31,7 +33,7 @@ class ProjectileManagerDiffblueTest {
     @Test
     void testExplosionGettersAndSetters() {
         // Arrange
-        ProjectileManager projectileManager = new ProjectileManager(new Playing(new Game()));
+        ProjectileManager projectileManager = new ProjectileManager(new Playing(new Game(test)));
         Point2D.Float pos = new Point2D.Float(10.0f, 10.0f);
 
         // Act

@@ -15,16 +15,18 @@ import robots.model.events.Wave;
 import robots.model.main.Game;
 import robots.managers.TileManager;
 import robots.managers.WaveManager;
+import robots.view.MainApplicationFrame;
 import robots.view.scenes.Playing;
 
 class WaveManagerDiffblueTest {
+    MainApplicationFrame test = new MainApplicationFrame();
     /**
      * Method under test: {@link WaveManager#update()}
      */
     @Test
     void testUpdate() {
         // Arrange
-        WaveManager waveManager = new WaveManager(new Playing(new Game()));
+        WaveManager waveManager = new WaveManager(new Playing(new Game(test)));
 
         // Act
         waveManager.update();
@@ -69,7 +71,7 @@ class WaveManagerDiffblueTest {
     @Test
     void testIncreaseWaveIndex() {
         // Arrange
-        WaveManager waveManager = new WaveManager(new Playing(new Game()));
+        WaveManager waveManager = new WaveManager(new Playing(new Game(test)));
 
         // Act
         waveManager.increaseWaveIndex();
@@ -128,7 +130,7 @@ class WaveManagerDiffblueTest {
     @Test
     void testIsTimeForNewEnemy() {
         // Arrange, Act and Assert
-        assertTrue((new WaveManager(new Playing(new Game()))).isTimeForNewEnemy());
+        assertTrue((new WaveManager(new Playing(new Game(test)))).isTimeForNewEnemy());
     }
 
     /**
@@ -174,7 +176,7 @@ class WaveManagerDiffblueTest {
     @Test
     void testIsThereMoreWaves() {
         // Arrange, Act and Assert
-        assertTrue((new WaveManager(new Playing(new Game()))).isThereMoreWaves());
+        assertTrue((new WaveManager(new Playing(new Game(test)))).isThereMoreWaves());
     }
 
     /**
@@ -200,7 +202,7 @@ class WaveManagerDiffblueTest {
     @Test
     void testGetTimeLeft() {
         // Arrange, Act and Assert
-        assertEquals(5.0f, (new WaveManager(new Playing(new Game()))).getTimeLeft());
+        assertEquals(5.0f, (new WaveManager(new Playing(new Game(test)))).getTimeLeft());
     }
 
     /**
@@ -226,7 +228,7 @@ class WaveManagerDiffblueTest {
     @Test
     void testReset() {
         // Arrange
-        WaveManager waveManager = new WaveManager(new Playing(new Game()));
+        WaveManager waveManager = new WaveManager(new Playing(new Game(test)));
 
         // Act
         waveManager.reset();
@@ -294,7 +296,7 @@ class WaveManagerDiffblueTest {
     @Test
     void testGettersAndSetters() {
         // Arrange
-        WaveManager waveManager = new WaveManager(new Playing(new Game()));
+        WaveManager waveManager = new WaveManager(new Playing(new Game(test)));
 
         // Act
         waveManager.resetEnemyIndex();

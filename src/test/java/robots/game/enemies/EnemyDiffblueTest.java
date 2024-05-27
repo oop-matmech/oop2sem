@@ -18,16 +18,18 @@ import robots.model.main.Game;
 import robots.managers.EnemyManager;
 import robots.managers.TileManager;
 import robots.model.objects.PathPoint;
+import robots.view.MainApplicationFrame;
 import robots.view.scenes.Playing;
 
 class EnemyDiffblueTest {
+    MainApplicationFrame test = new MainApplicationFrame();
     /**
      * Method under test: {@link Enemy#hurt(int)}
      */
     @Test
     void testHurt() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         Bat bat = new Bat(10.0f, 10.0f, 1, new EnemyManager(playing, start, new PathPoint(1, 1)));
@@ -66,7 +68,7 @@ class EnemyDiffblueTest {
     @Test
     void testKill() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         Bat bat = new Bat(10.0f, 10.0f, 1, new EnemyManager(playing, start, new PathPoint(1, 1)));
@@ -107,7 +109,7 @@ class EnemyDiffblueTest {
     @Test
     void testSlow() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         Bat bat = new Bat(10.0f, 10.0f, 1, new EnemyManager(playing, start, new PathPoint(1, 1)));
@@ -146,7 +148,7 @@ class EnemyDiffblueTest {
     @Test
     void testMove() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         Bat bat = new Bat(10.0f, 10.0f, 1, new EnemyManager(playing, start, new PathPoint(1, 1)));
@@ -168,7 +170,7 @@ class EnemyDiffblueTest {
     @Test
     void testMove2() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         Bat bat = new Bat(10.0f, 10.0f, 1, new EnemyManager(playing, start, new PathPoint(1, 1)));
@@ -190,7 +192,7 @@ class EnemyDiffblueTest {
     @Test
     void testMove3() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         Bat bat = new Bat(10.0f, 10.0f, 1, new EnemyManager(playing, start, new PathPoint(1, 1)));
@@ -212,7 +214,7 @@ class EnemyDiffblueTest {
     @Test
     void testMove4() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         Bat bat = new Bat(10.0f, 10.0f, 1, new EnemyManager(playing, start, new PathPoint(1, 1)));
@@ -259,7 +261,7 @@ class EnemyDiffblueTest {
     @Test
     void testSetPos() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         Bat bat = new Bat(10.0f, 10.0f, 1, new EnemyManager(playing, start, new PathPoint(1, 1)));
@@ -300,7 +302,7 @@ class EnemyDiffblueTest {
     @Test
     void testGetHealthBarFloat() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         // Act and Assert
@@ -334,7 +336,7 @@ class EnemyDiffblueTest {
     @Test
     void testGetX() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         // Act and Assert
@@ -366,7 +368,7 @@ class EnemyDiffblueTest {
     @Test
     void testGetY() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         // Act and Assert
@@ -398,7 +400,7 @@ class EnemyDiffblueTest {
     @Test
     void testGetBounds() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         Bat bat = new Bat(10.0f, 10.0f, 1, new EnemyManager(playing, start, new PathPoint(1, 1)));
@@ -434,7 +436,7 @@ class EnemyDiffblueTest {
     @Test
     void testGetHealth() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         // Act and Assert
@@ -466,7 +468,7 @@ class EnemyDiffblueTest {
     @Test
     void testGetID() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         // Act and Assert
@@ -498,7 +500,7 @@ class EnemyDiffblueTest {
     @Test
     void testGetEnemyType() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         // Act and Assert
@@ -531,7 +533,7 @@ class EnemyDiffblueTest {
     @Test
     void testGetLastDir() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         // Act and Assert
@@ -563,7 +565,7 @@ class EnemyDiffblueTest {
     @Test
     void testIsAlive() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         // Act and Assert
@@ -596,7 +598,7 @@ class EnemyDiffblueTest {
     @Test
     void testIsSlowed() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         // Act and Assert
@@ -629,7 +631,7 @@ class EnemyDiffblueTest {
     @Test
     void testSetLastDir() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         Bat bat = new Bat(10.0f, 10.0f, 1, new EnemyManager(playing, start, new PathPoint(1, 1)));

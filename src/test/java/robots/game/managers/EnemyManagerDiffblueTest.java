@@ -17,16 +17,18 @@ import robots.model.main.Game;
 import robots.model.objects.PathPoint;
 import robots.managers.EnemyManager;
 import robots.managers.TileManager;
+import robots.view.MainApplicationFrame;
 import robots.view.scenes.Playing;
 
 class EnemyManagerDiffblueTest {
+    MainApplicationFrame test = new MainApplicationFrame();
     /**
      * Method under test: {@link EnemyManager#update()}
      */
     @Test
     void testUpdate() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         EnemyManager enemyManager = new EnemyManager(playing, start, new PathPoint(1, 1));
@@ -86,7 +88,7 @@ class EnemyManagerDiffblueTest {
     @Test
     void testSpawnEnemy() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         EnemyManager enemyManager = new EnemyManager(playing, start, new PathPoint(1, 1));
@@ -105,7 +107,7 @@ class EnemyManagerDiffblueTest {
     @Test
     void testSpawnEnemy2() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         EnemyManager enemyManager = new EnemyManager(playing, start, new PathPoint(1, 1));
@@ -124,7 +126,7 @@ class EnemyManagerDiffblueTest {
     @Test
     void testSpawnEnemy3() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         EnemyManager enemyManager = new EnemyManager(playing, start, new PathPoint(1, 1));
@@ -143,7 +145,7 @@ class EnemyManagerDiffblueTest {
     @Test
     void testSpawnEnemy4() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         EnemyManager enemyManager = new EnemyManager(playing, start, new PathPoint(1, 1));
@@ -184,7 +186,7 @@ class EnemyManagerDiffblueTest {
     @Test
     void testAddEnemy() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         EnemyManager enemyManager = new EnemyManager(playing, start, new PathPoint(1, 1));
@@ -203,7 +205,7 @@ class EnemyManagerDiffblueTest {
     @Test
     void testAddEnemy2() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         EnemyManager enemyManager = new EnemyManager(playing, start, new PathPoint(1, 1));
@@ -222,7 +224,7 @@ class EnemyManagerDiffblueTest {
     @Test
     void testAddEnemy3() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         EnemyManager enemyManager = new EnemyManager(playing, start, new PathPoint(1, 1));
@@ -241,7 +243,7 @@ class EnemyManagerDiffblueTest {
     @Test
     void testAddEnemy4() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         EnemyManager enemyManager = new EnemyManager(playing, start, new PathPoint(1, 1));
@@ -282,7 +284,7 @@ class EnemyManagerDiffblueTest {
     @Test
     void testDraw() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         EnemyManager enemyManager = new EnemyManager(playing, start, new PathPoint(1, 1));
@@ -321,7 +323,7 @@ class EnemyManagerDiffblueTest {
     @Test
     void testGetEnemies() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         // Act and Assert
@@ -334,7 +336,7 @@ class EnemyManagerDiffblueTest {
     @Test
     void testGetAmountOfAliveEnemies() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         // Act and Assert
@@ -384,7 +386,7 @@ class EnemyManagerDiffblueTest {
     @Test
     void testReset() {
         // Arrange
-        Playing playing = new Playing(new Game());
+        Playing playing = new Playing(new Game(test));
         PathPoint start = new PathPoint(1, 1);
 
         EnemyManager enemyManager = new EnemyManager(playing, start, new PathPoint(1, 1));
