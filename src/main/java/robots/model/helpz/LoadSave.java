@@ -12,7 +12,7 @@ public class LoadSave {
 
 	public static String homePath = System.getProperty("user.home");
 	public static String saveFolder = "GAME";
-	public static String levelFile = "level.txt";
+	public static String levelFile = "level" + profileManager.getCurrentProfile() + ".txt";
 	public static String filePath = homePath + File.separator + saveFolder + File.separator + levelFile;
 	private static File lvlFile = new File(filePath);
 
@@ -121,5 +121,11 @@ public class LoadSave {
 			return null;
 		}
 
+	}
+
+	public static void changeProfile(String profile){
+		levelFile = "level" + profile + ".txt";
+		filePath = homePath + File.separator + saveFolder + File.separator + levelFile;
+		lvlFile = new File(filePath);
 	}
 }

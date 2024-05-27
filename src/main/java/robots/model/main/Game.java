@@ -3,6 +3,7 @@ package robots.model.main;
 import robots.model.helpz.LoadSave;
 import robots.managers.TileManager;
 import robots.model.helpz.profileManager;
+import robots.view.MainApplicationFrame;
 import robots.view.scenes.Editing;
 import robots.view.scenes.GameOver;
 import robots.view.scenes.Menu;
@@ -12,6 +13,7 @@ import javax.swing.*;
 
 public class Game extends JPanel implements Runnable {
 
+	private MainApplicationFrame screen;
 	public GameScreen gameScreen;
 	private Thread gameThread;
 
@@ -27,8 +29,9 @@ public class Game extends JPanel implements Runnable {
 
 	private TileManager tileManager;
 
-	public Game() {
+	public Game(MainApplicationFrame screen) {
 
+		this.screen = screen;
 		LoadSave.CreateFolder();
 		profileManager.CreateFolder();
 
@@ -58,7 +61,7 @@ public class Game extends JPanel implements Runnable {
 		tileManager = new TileManager();
 		render = new Render(this);
 		gameScreen = new GameScreen(this);
-		menu = new Menu(this);
+		menu = new Menu(this, screen);
 		playing = new Playing(this);
 		editing = new Editing(this);
 		gameOver = new GameOver(this);

@@ -9,14 +9,16 @@ public class GameWindow extends AbstractWindow {
 
     public GameWindow() {
         super(I18nProvider.getGameMessage("game_window_name"), true, true, true, true);
-        Game game = new Game();
+    }
+
+    public void startGame(MainApplicationFrame screen){
+        Game game = new Game(screen);
         game.gameScreen.initInputs();
         game.start();
         //  setResizable(false);
         getContentPane().add(game.gameScreen);
         pack();
     }
-
     @Override
     public void onUiChanged() {
         setTitle(I18nProvider.getGameMessage("game_window_name"));

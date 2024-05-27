@@ -4,6 +4,8 @@ import robots.model.helpz.profileManager;
 import robots.model.i18n.I18nProvider;
 import robots.model.log.Logger;
 import robots.view.Menu.CustomJmenuBar;
+import robots.view.ui.ProfileSaveWindow;
+import robots.view.ui.ProfileWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +18,9 @@ public class MainApplicationFrame extends JFrame {
     private final JDesktopPane desktopPane = new JDesktopPane();
     private final GameWindow gameWindow = createGameWindow();
     private final LogWindow logWindow = createLogWindow();
+    private final ProfileWindow profileWindow = createProfileWindow();
+
+    private CustomJmenuBar customJmenuBar = new CustomJmenuBar(this);
 
     public MainApplicationFrame() {
         //Make the big window be indented 50 pixels from each edge
@@ -30,10 +35,8 @@ public class MainApplicationFrame extends JFrame {
 
         setContentPane(desktopPane);
 
-        addWindow(logWindow);
-        addWindow(gameWindow);
+        addWindow(profileWindow);
 
-        CustomJmenuBar customJmenuBar = new CustomJmenuBar(this);
         setJMenuBar(customJmenuBar.generateMenuBar());
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -55,12 +58,8 @@ public class MainApplicationFrame extends JFrame {
                         options[0]
                 );
                 if (result == JOptionPane.YES_OPTION) {
-                    profileManager.setGameWindowPos(getGameWindowPos());
-                    profileManager.setLogWindowPos(logWindow.getLocationOnScreen());
-                    profileManager.WriteToFile();
-                    globalClose();
-                    dispose();
-                    System.exit(0);
+                    ProfileSaveWindow a = createProfileSaveWindow();
+                    a.setVisible(true);
                 }
             }
         });
@@ -68,7 +67,7 @@ public class MainApplicationFrame extends JFrame {
 
     protected LogWindow createLogWindow() {
         LogWindow logWindow = new LogWindow(Logger.getDefaultLogSource());
-        logWindow.setLocation(10, 10);
+        logWindow.setLocation(profileManager.getLogWindowPos());
         logWindow.setSize(300, 800);
         setMinimumSize(logWindow.getSize());
         logWindow.pack();
@@ -79,11 +78,26 @@ public class MainApplicationFrame extends JFrame {
 
     protected GameWindow createGameWindow() {
         GameWindow gameWindow = new GameWindow();
+        gameWindow.setLocation(profileManager.getGameWindowPos());
         gameWindow.setSize(640, 800);
         return gameWindow;
     }
 
-    protected void addWindow(JInternalFrame frame) {
+    protected ProfileWindow createProfileWindow() {
+        ProfileWindow profileWindow = new ProfileWindow(this);
+        profileWindow.setLocation(new Point(500, 100));
+        profileWindow.setSize(500, 100);
+        return profileWindow;
+    }
+
+    public ProfileSaveWindow createProfileSaveWindow() {
+        ProfileSaveWindow ProfileSaveWindow = new ProfileSaveWindow(this);
+        ProfileSaveWindow.setLocation(500, 100);
+        ProfileSaveWindow.setSize(500, 300);
+        return ProfileSaveWindow;
+    }
+
+    public void addWindow(JInternalFrame frame) {
         desktopPane.add(frame);
         frame.setVisible(true);
     }
@@ -97,7 +111,7 @@ public class MainApplicationFrame extends JFrame {
 
     }
 
-    private void globalClose() {
+    public void globalClose() {
         for (JInternalFrame frame : desktopPane.getAllFrames()) {
             if (frame instanceof AbstractWindow) {
                 frame.dispose();
@@ -121,9 +135,24 @@ public class MainApplicationFrame extends JFrame {
     }
 
     public Point getGameWindowPos() {
-        return gameWindow.getLocationOnScreen();
+        return gameWindow.getLocation();
     }
     public Point getLogWindowPos() {
-        return logWindow.getLocationOnScreen();
+        return logWindow.getLocation();
+    }
+
+    public GameWindow getGameWindow() {
+        return gameWindow;
+    }
+
+    public LogWindow getLogWindow() {
+        return logWindow;
+    }
+
+    public CustomJmenuBar getCustomJmenuBar() {
+        return customJmenuBar;
+    }
+    public JDesktopPane getDesktopPane(){
+        return desktopPane;
     }
 }

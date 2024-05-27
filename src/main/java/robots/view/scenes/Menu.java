@@ -1,8 +1,10 @@
 package robots.view.scenes;
 
 import robots.model.main.Game;
+import robots.view.MainApplicationFrame;
 import robots.view.ui.MyButton;
 import robots.model.i18n.I18nProvider;
+import robots.view.ui.ProfileSaveWindow;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -10,11 +12,12 @@ import java.awt.event.KeyEvent;
 import static robots.model.main.GameStates.*;
 
 public class Menu extends GameScene implements SceneMethods {
-
+    private MainApplicationFrame screen;
     private MyButton bPlaying, bEdit, bQuit;
 
-    public Menu(Game game) {
+    public Menu(Game game, MainApplicationFrame screen) {
         super(game);
+        this.screen = screen;
         initButtons();
     }
 
@@ -57,8 +60,10 @@ public class Menu extends GameScene implements SceneMethods {
             SetGameState(PLAYING);
         else if (bEdit.getBounds().contains(x, y))
             SetGameState(EDIT);
-        else if (bQuit.getBounds().contains(x, y))
-            System.exit(0);
+        else if (bQuit.getBounds().contains(x, y)){
+            ProfileSaveWindow a = screen.createProfileSaveWindow();
+            a.setVisible(true);
+        }
     }
 
     @Override

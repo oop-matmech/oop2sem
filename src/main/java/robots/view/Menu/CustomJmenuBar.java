@@ -5,6 +5,7 @@ import robots.model.i18n.I18nBundles;
 import robots.model.i18n.I18nProvider;
 import robots.model.log.Logger;
 import robots.view.MainApplicationFrame;
+import robots.view.ui.ProfileSaveWindow;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -22,7 +23,7 @@ public class CustomJmenuBar {
 
     }
 
-    private void switchLocale(Locale locale) {
+    public void switchLocale(Locale locale) {
         String language = locale.getLanguage();
         String country = locale.getCountry();
         var newLocale = new Locale(language, country);
@@ -160,12 +161,9 @@ public class CustomJmenuBar {
                             options[0]
                     );
 
-                    profileManager.setGameWindowPos(screen.getGameWindowPos());
-                    profileManager.setLogWindowPos(screen.getLogWindowPos());
-                    profileManager.WriteToFile();
-
                     if (result == JOptionPane.YES_OPTION) {
-                        System.exit(0);
+                        ProfileSaveWindow a = screen.createProfileSaveWindow();
+                        a.setVisible(true);
                     }
                 })
                 .buid()

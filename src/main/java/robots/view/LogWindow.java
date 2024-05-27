@@ -60,4 +60,9 @@ public class LogWindow extends AbstractWindow implements LogChangeListener {
         m_logSource.unregisterListener(this);
         profileManager.setLogWindowIsClosed(true);
     }
+
+    public String getLogText(){
+        return m_logContent.getText();
+    }
+    public void setLogText(String logText){ m_logContent.setText(logText);}
 }

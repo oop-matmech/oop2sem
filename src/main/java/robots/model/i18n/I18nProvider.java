@@ -31,6 +31,7 @@ public class I18nProvider {
         return switch (bundleKey) {
             case LOG_WINDOW -> "log_window";
             case GAME_WINDOW -> "game_window";
+            case PROFILE_WINDOW -> "profile_window";
             default -> "data";
         };
     }
@@ -50,6 +51,10 @@ public class I18nProvider {
 
     public static String getLogWindowMessage(String key) {
         return I18nProvider.getMessage(I18nBundles.LOG_WINDOW, key);
+    }
+
+    public static String getProfileWindowMessage(String key) {
+        return I18nProvider.getMessage(I18nBundles.PROFILE_WINDOW, key);
     }
 
     public static String getDataMessage(String key) {
