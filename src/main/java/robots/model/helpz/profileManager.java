@@ -204,4 +204,11 @@ public class profileManager {
             profileFile_del.delete();
         }
     }
+    public static void changeProfileSaveDirectory(String name){
+        File folder = new File(homePath + File.separator + saveFolder + File.separator + name);
+        if (!folder.exists())
+            folder.mkdir();
+        filePath = homePath + File.separator + saveFolder + File.separator + name + File.separator + profileName;
+        profileFile = new File(filePath);
+    }
 }

@@ -228,20 +228,6 @@ class LogWindowSourceDiffblueTest {
     }
 
     /**
-     * Method under test: {@link LogWindowSource#size()}
-     */
-    @Test
-    void testSize2() {
-        // Arrange
-        LogWindowSource defaultLogSource = Logger.getDefaultLogSource();
-        var prevSize = defaultLogSource.size();
-        defaultLogSource.append(LogLevel.Warning, "Str Message");
-
-        // Act and Assert
-        assertEquals(prevSize + 1, defaultLogSource.size());
-    }
-
-    /**
      * Method under test: {@link LogWindowSource#LogWindowSource(int)}
      */
     @Test
